@@ -1,18 +1,33 @@
+#include "gtest/gtest.h"
 #include <cstring>
 #include <signal.h>
 #include <gtest/gtest.h>
 #include "minitalk.h"
 
 
-TEST(serverTests, serverTest) {
-	signal(SIGUSR1, signal_handler);
+typedef void (*FunctionPtr)(void);
+
+struct serverTestParameter {
+	FunctionPtr sig_calls;
+	const char* want;
+};
+
+class serverTest : public ::testing::TestWithParam<serverTestParameter>{};
+
+void sigusr1() {
+	kill(getppid(), SIGUSR1);
+}
+
+TEST_P(serverTest, serverTest) {
+	serverTestParameter params = GetParam();
+
+	signal(SIGUSR1, signal_handler); // signal_handler is the src-code function
 
 	pid_t pid = fork();
 	ASSERT_NE(pid, -1) << "Forking failed";
 
 	if (pid == 0) {  // Child process
-// Send a signal to ourselves
-		kill(getppid(), SIGUSR1);
+		params.sig_calls();		// goes through the signal calls defined in sig_calls
 		_exit(0);  // Exit child process
 	} else {  // Parent process
 		int status;
@@ -22,3 +37,7 @@ TEST(serverTests, serverTest) {
 	}
 }
 
+INSTANTIATE_TEST_SUITE_P(serverTests, serverTest,
+                         testing::Values(
+							 serverTestParameter{sigusr1, "Signal received"}
+                             ));
