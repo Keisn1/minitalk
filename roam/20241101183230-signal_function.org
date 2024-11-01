@@ -1,0 +1,28 @@
+:PROPERTIES:
+:ID:       849b510a-ea52-4129-9c3a-d57382ffee5c
+:END:
+#+title: signal function
+#+date: [2024-11-01 Fri 18:32]
+#+startup: overview
+
+  #+begin_src c
+#include <stdio.h>
+#include <signal.h>
+
+
+
+void handle_sigusr1(int signum) {
+	printf("Received SIGUSR1!\n");
+}
+
+int main() {
+	signal(SIGUSR1, handle_sigusr1);
+
+	// Your main program logic here
+	while (1) {
+		pause(); // Wait for signals
+	}
+
+	return 0;
+}
+  #+end_src

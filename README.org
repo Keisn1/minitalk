@@ -1,3 +1,39 @@
 #+title: Minitalk
 * Description
 Minitalk project from 42 core curriculum
+* Common instructions
+- exectubles: =client= and =server=
+- allowed functions
+  - write
+  - signal
+  - kill
+  - getpid
+  - malloc
+  - free
+  - pause
+  - sleep
+  - usleep
+  - exit
+
+- for bonus
+  - sigaction
+* Mandatory part
+- Server-client communication program
+
+** Server
+- must be launched first
+- must display its PID
+- must display string, that is received
+- server may receive strings from several clients in a row
+  - without restarting
+
+** Client
+- parameter:
+  - server PID
+  - string that should be sent
+- must communicate the string (given as parameter) to the server
+
+** Constraints
+- communication only via UNIX signals
+- server needs to display the string instantly
+- can only use SIGUSR1 and SIGUSR2

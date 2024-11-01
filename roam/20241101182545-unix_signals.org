@@ -1,0 +1,28 @@
+:PROPERTIES:
+:ID:       803429cd-01b2-4df5-89f7-1690db448346
+:END:
+#+title: UNIX signals
+#+date: [2024-11-01 Fri 18:25]
+#+startup: overview
+
+
+* What are UNIX signals?
+
+- UNIX signals are software interrupts
+- provide a way for [[id:fdafc7dd-2495-46da-bfdf-d17c3199ca72][processes]] to be notified of and respond to various events
+- allowing for inter-process communication and handling of asynchronous events
+- Signals can be sent by the operating system, other processes, or even by the process itself
+
+- Processes can choose to handle signals in specific ways, either by executing a signal handler function or by ignoring the signal
+- some signals, like =SIGKILL=, cannot be caught or ignored
+- Signals provide flexibility and control over process execution and are fundamental in process lifecycle management in UNIX-like operating systems
+
+* Signals
+[[https://man7.org/linux/man-pages/man7/signal.7.html][Manpage signal(7)]]
+- Each signal has a specific name and number
+  - and they are used to indicate different kinds of events
+- [[id:e24065b5-abcd-4f99-af36-484f5d8560e5][SIGINT]]
+- [[id:c68e0b56-9a40-499b-a65c-cda0b5708258][SIGTERM]]
+- [[id:432e16cb-a6c0-4a54-860c-2c9392ced4ae][SIGKILL]]
+- [[id:1f65227a-4ac7-4e03-8a6e-794fa7df7115][SIGCHLD]]
+- [[id:fdff1c81-a2ab-4a09-ae11-36f512a5fb8f][SIGUSR1]]

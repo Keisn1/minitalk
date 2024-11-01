@@ -1,0 +1,37 @@
+:PROPERTIES:
+:ID:       fdff1c81-a2ab-4a09-ae11-36f512a5fb8f
+:END:
+#+title: SIGUSR1
+#+date: [2024-11-01 Fri 18:30]
+#+startup: overview
+
+* What is it?
+- =SIGUSR1= is a user-defined signal in UNIX and UNIX-like operating systems.
+
+- It is one of two signals, =SIGUSR1= and =SIGUSR2=, that are available for application developers to use for custom purposes.
+
+- Unlike predefined signals like =SIGINT= or =SIGTERM=, =SIGUSR1= has no predefined behavior or meaning, so developers can define and handle it as needed within their applications
+
+- This flexibility allows processes to communicate specific events or commands that are relevant to the application's logic
+
+* How do I work with this Signal?
+
+To work with =SIGUSR1= in a UNIX-like environment, you typically need to perform the following steps:
+
+1. *Signal Handling in a Program:*
+   - Use the [[id:849b510a-ea52-4129-9c3a-d57382ffee5c][signal()]] or [[id:27a65a29-3d91-4b9e-86c3-b31168910426][sigaction()]] system calls to define a custom handler function that will be executed when the process receives the =SIGUSR1= signal.
+
+2. *Sending the Signal:*
+   - 
+   - You can send a =SIGUSR1= signal to a process using the =kill= command from the terminal or the [[id:78d0139d-68b5-453c-ac56-036cd091ed26][kill()]] system call from another program.
+   - Using the command line, the syntax is:
+     #+begin_src
+     kill -USR1 <pid>
+     #+end_src
+     Replace =<pid>= with the process ID of the target process.
+
+3. *Handling in Multi-threaded Programs:*
+   - If your program is multi-threaded, ensure you configure signal handling correctly as signals are delivered to the process, and you may need to designate a specific thread to handle them.
+
+4. *From Within the Same Program:*
+   - A process can send a signal to itself using the [[id:69a88a1f-6e64-47ef-aa7c-5c4c8779ff86][raise]] function.

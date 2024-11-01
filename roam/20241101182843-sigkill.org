@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       432e16cb-a6c0-4a54-860c-2c9392ced4ae
+:END:
+#+title: SIGKILL
+#+date: [2024-11-01 Fri 18:28]
+#+startup: overview
+
+(Kill): Forces a process to terminate immediately; it cannot be caught or ignored.

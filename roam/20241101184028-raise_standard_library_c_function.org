@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       69a88a1f-6e64-47ef-aa7c-5c4c8779ff86
+:END:
+#+title: raise standard library C function
+#+date: [2024-11-01 Fri 18:40]
+#+startup: overview
+
+#+begin_src c
+#include <signal.h>
+
+int main() {
+	raise(SIGUSR1);
+	return 0;
+}
+#+end_src

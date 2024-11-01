@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       27a65a29-3d91-4b9e-86c3-b31168910426
+:END:
+#+title: sigaction function
+#+date: [2024-11-01 Fri 18:32]
+#+startup: overview

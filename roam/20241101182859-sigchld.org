@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       1f65227a-4ac7-4e03-8a6e-794fa7df7115
+:END:
+#+title: SIGCHLD
+#+date: [2024-11-01 Fri 18:28]
+#+startup: overview
+
+Sent to a parent process when a child process terminates or stops

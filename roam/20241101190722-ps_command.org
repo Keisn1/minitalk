@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       911a3c63-9913-4e33-8a52-b51d690797aa
+:END:
+#+title: ps command
+#+date: [2024-11-01 Fri 19:07]
+#+startup: overview
+
+ps - report a snapshot of the current processes.
+* Options
+** -A
+Select all processes.  Identical to -e.
+** -f
+- Do full-format listing.
+- This option can be  combined  with  many other  UNIX-style  options  to  add  additional columns.
+- It also causes the command arguments to be printed.
+- When used  with  -L, the  NLWP (number of threads) and LWP (thread ID) columns will be added.
+- See the c option, the format keyword args, and the format keyword comm.

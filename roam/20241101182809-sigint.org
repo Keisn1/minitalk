@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       e24065b5-abcd-4f99-af36-484f5d8560e5
+:END:
+#+title: SIGINT
+#+date: [2024-11-01 Fri 18:28]
+#+startup: overview
+
+(Interrupt): Sent when the user types an interrupt character (usually Ctrl+C).

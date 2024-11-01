@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       c68e0b56-9a40-499b-a65c-cda0b5708258
+:END:
+#+title: SIGTERM
+#+date: [2024-11-01 Fri 18:28]
+#+startup: overview
+
+(Terminate): Requests a process to terminate.
