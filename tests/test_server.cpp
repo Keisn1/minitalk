@@ -65,7 +65,8 @@ INSTANTIATE_TEST_SUITE_P(serverTests, serverTest,
 							 serverTestParameter{"!", "!"},
 							 serverTestParameter{"x", "x"},
 							 serverTestParameter{"x!", "x!"},
-							 serverTestParameter{"abc", "abc"}
+							 serverTestParameter{"abc", "abc"},
+							 serverTestParameter{"Ich bin toll", "Ich bin toll"}
 							 ));
 
 ////////////////////////////////////////////////////
