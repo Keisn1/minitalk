@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kfreyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/02 09:44/00 by kfreyer           #+#    #+#             */
-/*   Updated: 2024/11/02 09:44:00 by kfreyer          ###   ########.fr       */
+/*   Created: 2024/08/31 15:56/33 by kfreyer           #+#    #+#             */
+/*   Updated: 2024/08/31 15:56:33 by kfreyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
-#include <signal.h>
-#include <unistd.h>
 #include "libft.h"
 
-void	signal_handler(int signal)
+int	ft_lstsize(t_list *lst)
 {
-	static unsigned			signals_received = 0;
-	static unsigned char	c = 0;
+	int	count;
 
-#ifdef UNIT_TEST /* PreprocessorDirective */
-	if (signal == -1)
+	count = 0;
+	while (lst)
 	{
-		signals_received = 0;
-		return ;
+		count++;
+		lst = lst->next;
 	}
-#endif
-
-	signals_received++;
-	c = c >> 1;
-	if (signal == SIGUSR1)
-		c = c | 0b10000000;
-	if (signals_received == 8)
-		ft_putchar_fd(c, STDOUT_FILENO);
+	return (count);
 }

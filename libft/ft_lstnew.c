@@ -1,37 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kfreyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/02 09:44/00 by kfreyer           #+#    #+#             */
-/*   Updated: 2024/11/02 09:44:00 by kfreyer          ###   ########.fr       */
+/*   Created: 2024/08/20 18:07/50 by kfreyer           #+#    #+#             */
+/*   Updated: 2024/08/20 18:07:50 by kfreyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
-#include <signal.h>
-#include <unistd.h>
 #include "libft.h"
 
-void	signal_handler(int signal)
+t_list	*ft_lstnew(void *content)
 {
-	static unsigned			signals_received = 0;
-	static unsigned char	c = 0;
+	t_list	*new;
 
-#ifdef UNIT_TEST /* PreprocessorDirective */
-	if (signal == -1)
-	{
-		signals_received = 0;
-		return ;
-	}
-#endif
-
-	signals_received++;
-	c = c >> 1;
-	if (signal == SIGUSR1)
-		c = c | 0b10000000;
-	if (signals_received == 8)
-		ft_putchar_fd(c, STDOUT_FILENO);
+	new = (t_list *)malloc(sizeof(t_list));
+	if (!new)
+		return (NULL);
+	new->content = content;
+	new->next = NULL;
+	return (new);
 }

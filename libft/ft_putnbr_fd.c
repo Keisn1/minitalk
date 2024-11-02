@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kfreyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/02 09:44/00 by kfreyer           #+#    #+#             */
-/*   Updated: 2024/11/02 09:44:00 by kfreyer          ###   ########.fr       */
+/*   Created: 2024/07/31 21:52/40 by kfreyer           #+#    #+#             */
+/*   Updated: 2024/07/31 21:52:40 by kfreyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
-#include <signal.h>
-#include <unistd.h>
 #include "libft.h"
 
-void	signal_handler(int signal)
+void	ft_putnbr_fd(int nb, int fd)
 {
-	static unsigned			signals_received = 0;
-	static unsigned char	c = 0;
+	int		arr[10];
+	int		idx;
 
-#ifdef UNIT_TEST /* PreprocessorDirective */
-	if (signal == -1)
+	if (nb < 0)
+		ft_putchar_fd('-', fd);
+	idx = 0;
+	arr[idx++] = ft_abs(nb % 10);
+	nb = ft_abs(nb / 10);
+	while (nb > 0)
 	{
-		signals_received = 0;
-		return ;
+		arr[idx++] = nb % 10;
+		nb /= 10;
 	}
-#endif
-
-	signals_received++;
-	c = c >> 1;
-	if (signal == SIGUSR1)
-		c = c | 0b10000000;
-	if (signals_received == 8)
-		ft_putchar_fd(c, STDOUT_FILENO);
+	while (--idx >= 0)
+		ft_putchar_fd(arr[idx] + '0', fd);
 }

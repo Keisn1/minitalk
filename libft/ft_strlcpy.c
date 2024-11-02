@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kfreyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/02 09:44/00 by kfreyer           #+#    #+#             */
-/*   Updated: 2024/11/02 09:44:00 by kfreyer          ###   ########.fr       */
+/*   Created: 2024/07/31 10:22/36 by kfreyer           #+#    #+#             */
+/*   Updated: 2024/07/31 10:22:36 by kfreyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
-#include <signal.h>
-#include <unistd.h>
 #include "libft.h"
 
-void	signal_handler(int signal)
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	static unsigned			signals_received = 0;
-	static unsigned char	c = 0;
+	size_t	count;
 
-#ifdef UNIT_TEST /* PreprocessorDirective */
-	if (signal == -1)
+	if (size == 0)
+		return (ft_strlen(src));
+	count = 0;
+	while (src[count] != '\0' && (count < size - 1))
 	{
-		signals_received = 0;
-		return ;
+		dst[count] = src[count];
+		count++;
 	}
-#endif
-
-	signals_received++;
-	c = c >> 1;
-	if (signal == SIGUSR1)
-		c = c | 0b10000000;
-	if (signals_received == 8)
-		ft_putchar_fd(c, STDOUT_FILENO);
+	dst[count] = '\0';
+	return (ft_strlen(src));
 }

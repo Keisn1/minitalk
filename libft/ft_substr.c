@@ -1,37 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kfreyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/02 09:44/00 by kfreyer           #+#    #+#             */
-/*   Updated: 2024/11/02 09:44:00 by kfreyer          ###   ########.fr       */
+/*   Created: 2024/07/31 17:55/48 by kfreyer           #+#    #+#             */
+/*   Updated: 2024/07/31 17:55:48 by kfreyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
-#include <signal.h>
-#include <unistd.h>
 #include "libft.h"
+#include <stdio.h>
 
-void	signal_handler(int signal)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	static unsigned			signals_received = 0;
-	static unsigned char	c = 0;
+	size_t	len_s;
+	size_t	count;
+	char	*new;
 
-#ifdef UNIT_TEST /* PreprocessorDirective */
-	if (signal == -1)
+	len_s = ft_strlen(s);
+	if (start >= len_s)
+		return (ft_get_empty_str(1));
+	if ((len_s - start) < len)
+		len = len_s - start;
+	new = (char *)malloc(sizeof(char) * (len + 1));
+	if (!new)
+		return (NULL);
+	count = 0;
+	while (count < len)
 	{
-		signals_received = 0;
-		return ;
+		new[count++] = s[start];
+		start++;
 	}
-#endif
-
-	signals_received++;
-	c = c >> 1;
-	if (signal == SIGUSR1)
-		c = c | 0b10000000;
-	if (signals_received == 8)
-		ft_putchar_fd(c, STDOUT_FILENO);
+	new[count] = '\0';
+	return (new);
 }

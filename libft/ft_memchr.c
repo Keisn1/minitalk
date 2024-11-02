@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kfreyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/02 09:44/00 by kfreyer           #+#    #+#             */
-/*   Updated: 2024/11/02 09:44:00 by kfreyer          ###   ########.fr       */
+/*   Created: 2024/07/31 13:11/04 by kfreyer           #+#    #+#             */
+/*   Updated: 2024/07/31 13:11:04 by kfreyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
-#include <signal.h>
-#include <unistd.h>
 #include "libft.h"
 
-void	signal_handler(int signal)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	static unsigned			signals_received = 0;
-	static unsigned char	c = 0;
+	size_t			idx;
+	unsigned char	*ptr;
+	unsigned char	cmp;
 
-#ifdef UNIT_TEST /* PreprocessorDirective */
-	if (signal == -1)
+	ptr = (unsigned char *)s;
+	cmp = (unsigned char)c;
+	idx = 0;
+	while (idx < n)
 	{
-		signals_received = 0;
-		return ;
+		if (ptr[idx] == cmp)
+			return ((void *)(ptr + idx));
+		idx++;
 	}
-#endif
-
-	signals_received++;
-	c = c >> 1;
-	if (signal == SIGUSR1)
-		c = c | 0b10000000;
-	if (signals_received == 8)
-		ft_putchar_fd(c, STDOUT_FILENO);
+	return (NULL);
 }

@@ -1,0 +1,62 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-Ilibft",
+      "-Iincludes",
+      "-fsanitize=address",
+      "-pthread",
+      "-DUNIT_TEST",
+      "-o",
+      "./run_tests",
+      "server.c"
+    ],
+    "directory": "/home/kay/workspace/minitalk",
+    "file": "/home/kay/workspace/minitalk/server.c",
+    "output": "/home/kay/workspace/minitalk/run_tests"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-Ilibft",
+      "-Iincludes",
+      "-fsanitize=address",
+      "-pthread",
+      "-DUNIT_TEST",
+      "-o",
+      "./run_tests",
+      "tests/test_main.cpp"
+    ],
+    "directory": "/home/kay/workspace/minitalk",
+    "file": "/home/kay/workspace/minitalk/tests/test_main.cpp",
+    "output": "/home/kay/workspace/minitalk/run_tests"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-Ilibft",
+      "-Iincludes",
+      "-fsanitize=address",
+      "-pthread",
+      "-DUNIT_TEST",
+      "-o",
+      "./run_tests",
+      "tests/test_server.cpp"
+    ],
+    "directory": "/home/kay/workspace/minitalk",
+    "file": "/home/kay/workspace/minitalk/tests/test_server.cpp",
+    "output": "/home/kay/workspace/minitalk/run_tests"
+  }
+]

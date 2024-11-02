@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   ft_ptr_to_hex.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kfreyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/02 09:44/00 by kfreyer           #+#    #+#             */
-/*   Updated: 2024/11/02 09:44:00 by kfreyer          ###   ########.fr       */
+/*   Created: 2024/09/03 15:30/21 by kfreyer           #+#    #+#             */
+/*   Updated: 2024/09/03 15:30:21 by kfreyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
-#include <signal.h>
-#include <unistd.h>
 #include "libft.h"
 
-void	signal_handler(int signal)
+int	ft_ptr_to_hex(void *p, char *hex_str)
 {
-	static unsigned			signals_received = 0;
-	static unsigned char	c = 0;
+	const char	*hex_chars = "0123456789abcdef";
+	int			pos;
+	int			digits;
+	char		c;
 
-#ifdef UNIT_TEST /* PreprocessorDirective */
-	if (signal == -1)
+	digits = 1;
+	pos = 15;
+	while (pos >= 0)
 	{
-		signals_received = 0;
-		return ;
+		c = hex_chars[((long unsigned)p >> (pos * 4)) & 0xF];
+		if (c != '0' && digits == 1)
+			digits = pos + 1;
+		hex_str[15 - pos] = c;
+		pos--;
 	}
-#endif
-
-	signals_received++;
-	c = c >> 1;
-	if (signal == SIGUSR1)
-		c = c | 0b10000000;
-	if (signals_received == 8)
-		ft_putchar_fd(c, STDOUT_FILENO);
+	hex_str[16] = '\0';
+	return (digits);
 }

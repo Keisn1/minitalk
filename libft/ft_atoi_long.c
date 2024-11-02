@@ -1,37 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   ft_atoi_long.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kfreyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/02 09:44/00 by kfreyer           #+#    #+#             */
-/*   Updated: 2024/11/02 09:44:00 by kfreyer          ###   ########.fr       */
+/*   Created: 2024/10/21 17:25/08 by kfreyer           #+#    #+#             */
+/*   Updated: 2024/10/21 17:25:08 by kfreyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
-#include <signal.h>
-#include <unistd.h>
 #include "libft.h"
 
-void	signal_handler(int signal)
+
+long	ft_atoi_long(const char *nptr)
 {
-	static unsigned			signals_received = 0;
-	static unsigned char	c = 0;
+	long	res;
+	long	sign;
 
-#ifdef UNIT_TEST /* PreprocessorDirective */
-	if (signal == -1)
+	while ((*nptr >= '\t' && *nptr <= '\r') || *nptr == ' ')
+		nptr++;
+	sign = 1;
+	if (*nptr == '-' || *nptr == '+')
 	{
-		signals_received = 0;
-		return ;
+		if (*nptr == '-')
+			sign *= -1;
+		nptr++;
 	}
-#endif
-
-	signals_received++;
-	c = c >> 1;
-	if (signal == SIGUSR1)
-		c = c | 0b10000000;
-	if (signals_received == 8)
-		ft_putchar_fd(c, STDOUT_FILENO);
+	res = 0;
+	while (*nptr >= '0' && *nptr <= '9')
+	{
+		res *= 10;
+		res += (*nptr - '0');
+		nptr++;
+	}
+	return (sign * res);
 }

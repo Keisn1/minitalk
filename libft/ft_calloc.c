@@ -1,37 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kfreyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/02 09:44/00 by kfreyer           #+#    #+#             */
-/*   Updated: 2024/11/02 09:44:00 by kfreyer          ###   ########.fr       */
+/*   Created: 2024/07/31 14:43/13 by kfreyer           #+#    #+#             */
+/*   Updated: 2024/07/31 14:43:13 by kfreyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
-#include <signal.h>
-#include <unistd.h>
 #include "libft.h"
+#include <stdlib.h>
 
-void	signal_handler(int signal)
+static int	int_overflow(size_t nmemb, size_t size)
 {
-	static unsigned			signals_received = 0;
-	static unsigned char	c = 0;
+	if (INT_MAX / size >= nmemb)
+		return (0);
+	return (1);
+}
 
-#ifdef UNIT_TEST /* PreprocessorDirective */
-	if (signal == -1)
-	{
-		signals_received = 0;
-		return ;
-	}
-#endif
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	void	*ptr;
 
-	signals_received++;
-	c = c >> 1;
-	if (signal == SIGUSR1)
-		c = c | 0b10000000;
-	if (signals_received == 8)
-		ft_putchar_fd(c, STDOUT_FILENO);
+	if (!nmemb || !size)
+		return (malloc(0));
+	if (int_overflow(nmemb, size))
+		return (NULL);
+	ptr = malloc(size * nmemb);
+	if (!ptr)
+		return (ptr);
+	ft_bzero(ptr, nmemb * size);
+	return (ptr);
 }

@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   ft_num_of_digits.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kfreyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/02 09:44/00 by kfreyer           #+#    #+#             */
-/*   Updated: 2024/11/02 09:44:00 by kfreyer          ###   ########.fr       */
+/*   Created: 2024/09/03 13:00/21 by kfreyer           #+#    #+#             */
+/*   Updated: 2024/09/03 13:00:21 by kfreyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
-#include <signal.h>
-#include <unistd.h>
 #include "libft.h"
 
-void	signal_handler(int signal)
+int	ft_num_of_digits(int d)
 {
-	static unsigned			signals_received = 0;
-	static unsigned char	c = 0;
+	int	count;
 
-#ifdef UNIT_TEST /* PreprocessorDirective */
-	if (signal == -1)
+	count = 1;
+	if (d <= -10)
 	{
-		signals_received = 0;
-		return ;
+		d /= -10;
+		count++;
 	}
-#endif
-
-	signals_received++;
-	c = c >> 1;
-	if (signal == SIGUSR1)
-		c = c | 0b10000000;
-	if (signals_received == 8)
-		ft_putchar_fd(c, STDOUT_FILENO);
+	while (d >= 10)
+	{
+		d /= 10;
+		count++;
+	}
+	return (count);
 }
