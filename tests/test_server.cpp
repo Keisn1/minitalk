@@ -33,7 +33,6 @@ void send_char(char c) {
 	}
 }
 
-
 TEST_P(serverTest, testStrings) {
 	serverTestParameter params = GetParam();
 
@@ -51,6 +50,7 @@ TEST_P(serverTest, testStrings) {
 			send_char(*msg);
 			msg++;
 		}
+		send_char(*msg);
 		_exit(0);  // Exit child process
 	} else {  // Parent process
 		int status;
@@ -63,10 +63,12 @@ TEST_P(serverTest, testStrings) {
 INSTANTIATE_TEST_SUITE_P(serverTests, serverTest,
 						 testing::Values(
 							 serverTestParameter{"!", "!"},
-							 serverTestParameter{"x", "x"}
-							 // serverTestParameter{"x!", "x!"}
+							 serverTestParameter{"x", "x"},
+							 serverTestParameter{"x!", "x!"},
+							 serverTestParameter{"abc", "abc"}
 							 ));
 
+////////////////////////////////////////////////////
 // test messages that are not multiple of 8 bits
 
 class testIncompleteStrings : public ::testing::TestWithParam<serverTestParameter> {
