@@ -1,15 +1,19 @@
 #include "minitalk.h"
-#include <stdlib.h>
-#include <string.h>
-
-volatile char* got_signal_msg = NULL;
+#include <unistd.h>
 
 void signal_handler(int signal) {
-	if (signal) {
+	static unsigned signals_received = 0;
 
+#ifdef UNIT_TEST				/* PreprocessorDirective */
+	if (signal == -1) {
+		signals_received = 0;
+		return;
 	}
-	if (got_signal_msg == NULL) {
-		got_signal_msg = (volatile char*)malloc(32);
+#endif
+
+	signals_received++;
+	if (signals_received == 8) {
+		char c = '!';
+		write(1, &c, STDOUT_FILENO);
 	}
-	strcpy((char*)got_signal_msg, "Signal received");
 }
