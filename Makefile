@@ -62,7 +62,7 @@ fclean: clean
 re: fclean all
 
 test: $(TEST_TARGET)
-	- $(TEST_TARGET)
+	- $(TEST_TARGET) --gtest_repeat=10
 
 libft:
 	$(MAKE) -C libft

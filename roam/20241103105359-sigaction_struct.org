@@ -27,9 +27,33 @@ struct sigaction {
 
 * [[id:0f08ce3f-b0f1-41c6-8d1b-0751cdacb6a5][sa_flags]]
 - if SA_SIGINFO is specified then, =sa_sigaction= is used instead of =sa_handler=
+- specifies flags, that modify the behavior of the signal
 
 * sa_mask ([[id:832fb147-3abc-4254-a909-18d8dc295ddc][sigset_t]]) (blocking signals)
 - sa_mask is of type =sigset_t= ([[id:832fb147-3abc-4254-a909-18d8dc295ddc][modifying sigset_t]])
 - mask of signals which should be ~blocked~, during execution of the signal handler
 - it is added to the signal mask of the thread, where the signal handler is invoked
 - also: signal which triggered the handler is blocked, unless =SA_NODEFER= is specified in [[id:0f08ce3f-b0f1-41c6-8d1b-0751cdacb6a5][sa_flags]]
+
+* siginfo_t argument
+#+begin_src c
+struct sigaction act;
+act.sa_flags = SA_SIGINFO;
+#+end_src
+** the act.sa_sigaction handler
+#+begin_src c
+void handler(int sig, siginfo_t *info, void* ucontext)
+#+end_src
+*** sig
+- number fo the signal that caused invocation of the handler
+*** info
+- pointer to [[id:271d946e-a492-45bc-84b9-6d58fc050833][siginfo_t]]
+- contains
+  #+begin_src c
+pid_t si_pid; /* Sending process ID */
+  #+end_src
+*** ucontext
+- pointer to [[id:b49bad29-1f79-4bc8-b51e-ca49bc2d3a57][ucontext_t]]  (cast to (void*))
+- contains signal context information
+  - saved on the user-space stack by the kernel
+  - see =sigreturn= for details

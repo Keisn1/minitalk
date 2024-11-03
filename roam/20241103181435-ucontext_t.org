@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       b49bad29-1f79-4bc8-b51e-ca49bc2d3a57
+:END:
+#+title: ucontext_t
+#+date: [2024-11-03 Sun 18:14]
+#+startup: overview
+
+- contains signal context information
+- man getcontext(3) and signal(7)

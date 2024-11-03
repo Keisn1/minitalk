@@ -61,17 +61,25 @@ char	*update_buffer(size_t length, unsigned int signals_received, bool reset)
 	return (buffer);
 }
 
-void	string_handler(int signal)
+void	string_handler(int sig, siginfo_t *siginfo, void *)
 {
 	char				*buffer;
 	static size_t		length = 0;
 	static unsigned int	signals_received = 0;
+	pid_t				client_pid;
 
 	buffer = update_buffer(length, signals_received, false);
-	if (signal == SIGUSR1)
+	if (sig == SIGUSR1)
+	{
 		buffer[length] = (buffer[length] >> 1) | 0b10000000;
-	else if (signal == SIGUSR2)
+	}
+	else if (sig == SIGUSR2)
+	{
 		buffer[length] = (buffer[length] >> 1) & 0b01111111;
+	}
+	/* pid_t client_pid; */
+	client_pid = siginfo->si_pid;
+	kill(client_pid, SIGUSR1);
 	signals_received++;
 	if (signals_received % 8 == 0)
 	{
@@ -95,4 +103,3 @@ void	interrupt_handler(int signal)
 		exit(0);
 	}
 }
-

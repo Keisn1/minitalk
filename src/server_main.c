@@ -18,10 +18,13 @@
 
 int	main(void)
 {
-	signal(SIGUSR1, string_handler);
-	signal(SIGUSR2, string_handler);
-	signal(SIGINT, interrupt_handler);
-	signal(SIGTERM, interrupt_handler);
+	struct sigaction action;
+	action.sa_sigaction = &string_handler;
+    action.sa_flags = SA_SIGINFO;
+	sigemptyset(&action.sa_mask);
+	sigaction(SIGUSR1, &action, NULL);
+	sigaction(SIGUSR2, &action, NULL);
+
 	ft_putstr_fd((char *)"Server pid: ", STDOUT_FILENO);
 	ft_putnbr_fd(getpid(), STDOUT_FILENO);
 	ft_putendl_fd((char *)"", STDOUT_FILENO);

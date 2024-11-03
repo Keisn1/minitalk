@@ -2,3 +2,6 @@
 /roam/minitalk.db
 /run_tests
 /.cache/
+/obj/
+/client
+/server

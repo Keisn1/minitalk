@@ -22,4 +22,5 @@ any valid [[id:803429cd-01b2-4df5-89f7-1690db448346][signal]] except [[id:432e16
 * act and oldact
 - If ~act~ is non-NULL, the new action for signal signum is installed from ~act~.
 - If ~oldact~ is non-NULL, the previous action is saved in ~oldact~.
+
 * [[id:4e4a6ef9-232f-4d85-830b-7199db1076e0][sigaction struct]]
