@@ -4,3 +4,22 @@
 #+title: sigaction function
 #+date: [2024-11-01 Fri 18:32]
 #+startup: overview
+
+#+begin_src c
+#include <signal.h>
+
+int sigaction(int signum,
+			  const struct sigaction *_Nullable restrict act,
+			  struct sigaction *_Nullable restrict oldact);
+#+end_src
+
+Change action by a process on receipt of a specific signal.
+* signum
+:PROPERTIES:
+:ID:       aefcf767-8a38-46ee-92f7-c58bef165130
+:END:
+any valid [[id:803429cd-01b2-4df5-89f7-1690db448346][signal]] except [[id:432e16cb-a6c0-4a54-860c-2c9392ced4ae][SIGKILL]] or [[id:79c685dc-f0e3-452c-bb49-004e76e2d178][SIGSTOP]]
+* act and oldact
+- If ~act~ is non-NULL, the new action for signal signum is installed from ~act~.
+- If ~oldact~ is non-NULL, the previous action is saved in ~oldact~.
+* [[id:4e4a6ef9-232f-4d85-830b-7199db1076e0][sigaction struct]]

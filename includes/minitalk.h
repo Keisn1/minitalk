@@ -1,12 +1,16 @@
 #ifndef MINITALK_H
 # define MINITALK_H
 
-# ifdef __cplusplus
+#include <signal.h>
 
+# ifdef __cplusplus
 extern "C"
 {
 # endif
-	void signal_handler(int signal);
+
+	void string_handler(int signal);
+	void interrupt_handler(int signal);
+	void send_char(char c, pid_t pid);
 
 # ifdef __cplusplus
 }

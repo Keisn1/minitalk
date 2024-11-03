@@ -6,6 +6,9 @@
 #+startup: overview
 
 ps - report a snapshot of the current processes.
+
+- Use it to locate the PID: =ps aux | grep your_program_name=.
+
 * Options
 ** -A
 Select all processes.  Identical to -e.

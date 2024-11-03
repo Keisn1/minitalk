@@ -87,25 +87,12 @@ void	string_handler(int signal)
 	}
 }
 
-/* vointerrupt_handlerupt(int signal) */
-/* { */
-/* 	if (signal == SIGTERM || signal == SIGINT) */
-/* 	{ */
-/* 		ft_putendl_fd((char *)"Goodbye.", STDOUT_FILENO); */
-/* 		exit(0); */
-/* 	} */
-/* } */
+void	interrupt_handler(int signal)
+{
+	if (signal == SIGTERM || signal == SIGINT)
+	{
+		ft_putendl_fd((char *)"Goodbye.", STDOUT_FILENO);
+		exit(0);
+	}
+}
 
-/* int	main(void) */
-/* { */
-/* 	signal(SIGUSR1, string_handler); */
-/* 	signal(SIGUSR2, string_handler); */
-/* 	signal(SIGINT, handle_interrupt); */
-/* 	signal(SIGTERM, handle_interrupt); */
-/* 	ft_putendl_fd((char *)"Ready to receive strings...", STDOUT_FILENO); */
-/* 	while (1) */
-/* 	{ */
-/* 		pause(); */
-/* 	} */
-/* 	return (0); */
-/* } */

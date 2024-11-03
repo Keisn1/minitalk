@@ -1,0 +1,35 @@
+:PROPERTIES:
+:ID:       4e4a6ef9-232f-4d85-830b-7199db1076e0
+:END:
+#+title: sigaction struct
+#+date: [2024-11-03 Sun 10:53]
+#+startup: overview
+
+Something like
+#+begin_src c
+struct sigaction {
+        void     (*sa_handler)(int);
+        void     (*sa_sigaction)(int, siginfo_t *, void *);
+        sigset_t   sa_mask;
+        int        sa_flags;
+        void     (*sa_restorer)(void);
+};
+#+end_src
+
+!!! Do not asign both to ~sa_handler~ and ~sa_sigaction~ !!!
+
+* sa_handler (sigaction_handler)
+- action associated with [[id:aefcf767-8a38-46ee-92f7-c58bef165130][signum]]
+  - [[id:c13b6b9f-a1c6-4f89-8294-1e54a629ec25][SIG_DFL]]
+  - [[id:9b875148-2b6d-419e-8487-a01e691e59f7][SIG_IGN]]
+  - A pointer to a signal handling function
+    - This function receives the signal number as its only argument
+
+* [[id:0f08ce3f-b0f1-41c6-8d1b-0751cdacb6a5][sa_flags]]
+- if SA_SIGINFO is specified then, =sa_sigaction= is used instead of =sa_handler=
+
+* sa_mask ([[id:832fb147-3abc-4254-a909-18d8dc295ddc][sigset_t]]) (blocking signals)
+- sa_mask is of type =sigset_t= ([[id:832fb147-3abc-4254-a909-18d8dc295ddc][modifying sigset_t]])
+- mask of signals which should be ~blocked~, during execution of the signal handler
+- it is added to the signal mask of the thread, where the signal handler is invoked
+- also: signal which triggered the handler is blocked, unless =SA_NODEFER= is specified in [[id:0f08ce3f-b0f1-41c6-8d1b-0751cdacb6a5][sa_flags]]

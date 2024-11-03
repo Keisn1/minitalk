@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       d8ccaef3-b6d2-40d2-9981-3e64f750135a
+:END:
+#+title: sigaddset function
+#+date: [2024-11-03 Sun 11:14]
+#+startup: overview
+
+#+begin_src c
+int sigaddset(sigset_t *set, int signum);
+#+end_src
+
+addsignal =signum= to set

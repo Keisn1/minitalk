@@ -26,3 +26,6 @@
 - [[id:432e16cb-a6c0-4a54-860c-2c9392ced4ae][SIGKILL]]
 - [[id:1f65227a-4ac7-4e03-8a6e-794fa7df7115][SIGCHLD]]
 - [[id:fdff1c81-a2ab-4a09-ae11-36f512a5fb8f][SIGUSR1]]
+- [[id:79c685dc-f0e3-452c-bb49-004e76e2d178][SIGSTOP]]
+* [[id:27a65a29-3d91-4b9e-86c3-b31168910426][sigaction function]]
+* [[id:849b510a-ea52-4129-9c3a-d57382ffee5c][signal function]]

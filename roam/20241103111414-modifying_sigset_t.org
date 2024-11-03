@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       832fb147-3abc-4254-a909-18d8dc295ddc
+:END:
+#+title: sigset_t
+#+date: [2024-11-03 Sun 11:14]
+#+startup: overview
+
+* [[id:efdc6328-8124-4005-9648-2ea28b0d1050][sigemptyset function]]
+* [[id:d8ccaef3-b6d2-40d2-9981-3e64f750135a][sigaddset function]]

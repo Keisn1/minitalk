@@ -4,28 +4,62 @@
 # @file
 # @version 0.1
 
+SRC_DIR := src
+OBJ_DIR := obj
 TESTS_DIR := tests
 
-INCLUDES := -Ilibft -Iincludes
-LIBFT := -Llibft -lft
-FSANITIZE := -fsanitize=address
+CC := cc
+CFLAGS := -Wall -Werror -Wextra
 
 CXX := g++
 CXXFLAGS := -Wall -Werror -Wextra
 GTEST := -lgtest -lgtest_main -pthread
 
-SRC_FILES := $(wildcard *.c)
+INCLUDES := -Ilibft -Iincludes
+LIBFT := -Llibft -lft
+FSANITIZE := -fsanitize=address
 
+SRC_FILES := $(wildcard $(SRC_DIR)/*.c)
+OBJ_FILES := $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+SERVER_SRC_FILES := $(wildcard $(SRC_DIR)/server*.c)
+CLIENT_SRC_FILES := $(wildcard $(SRC_DIR)/client*.c)
+
+TEST_OBJ_FILES := $(filter-out %_main.o, $(OBJ_FILES))
 TEST_SRC_FILES := $(wildcard $(TESTS_DIR)/*.cpp)
 
-TEST_TARGET := ./run_tests
-UNIT_TEST := -DUNIT_TEST
+SERVER := server
+CLIENT := client
 
-$(TEST_TARGET): $(TEST_SRC_FILES) $(SRC_FILES)
-	$(CXX) $(CXXFLAGS)  $(SRC_FILES) $(TEST_SRC_FILES) -o $(TEST_TARGET) $(INCLUDES) $(FSANITIZE) $(GTEST) $(UNIT_TEST) $(LIBFT)
+TEST_TARGET := ./run_tests
+
+all: $(SERVER) $(CLIENT)
+
+$(SERVER): $(SERVER_SRC_FILES)
+	$(CC) $(CFLAGS) $^ -o $(SERVER) $(LIBFT) $(INCLUDES)
+
+$(CLIENT): $(CLIENT_SRC_FILES)
+	$(CC) $(CFLAGS) $^ -o $(CLIENT) $(LIBFT) $(INCLUDES)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+$(TEST_TARGET): $(TEST_SRC_FILES) $(TEST_OBJ_FILES)
+	$(CXX) $(CXXFLAGS)  $(TEST_OBJ_FILES) $(TEST_SRC_FILES) -o $(TEST_TARGET) $(INCLUDES) $(FSANITIZE) $(GTEST) $(LIBFT)
+
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
+
+##############################
+# PHONY
 
 clean: libft-clean
-	rm -f $(TEST_TARGET)
+	rm -f $(TEST_TARGET) $(OBJ_FILES)
+
+fclean: clean
+	rm -f $(SERVER)
+	rm -f $(CLIENT)
+
+re: fclean all
 
 test: $(TEST_TARGET)
 	- $(TEST_TARGET)
@@ -44,7 +78,19 @@ libft-fclean:
 
 bear: $(TEST_TARGET)
 
-.PHONY: test libft libft-re libft-clean libft-fclean bear
+src-files:
+	@echo $(SRC_FILES)
+
+obj-files:
+	@echo $(OBJ_FILES)
+
+test-src-files:
+	@echo $(TEST_SRC_FILES)
+
+test-obj-files:
+	@echo $(TEST_OBJ_FILES)
+
+.PHONY: test libft libft-re libft-clean libft-fclean bear src-files obj-files all
 
 
 # end

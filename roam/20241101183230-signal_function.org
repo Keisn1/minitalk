@@ -5,11 +5,11 @@
 #+date: [2024-11-01 Fri 18:32]
 #+startup: overview
 
+
+- using [[id:996721c2-1105-4c80-b4a4-d8115f239046][pause function]] in while loop
   #+begin_src c
 #include <stdio.h>
 #include <signal.h>
-
-
 
 void handle_sigusr1(int signum) {
 	printf("Received SIGUSR1!\n");

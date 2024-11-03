@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       c13b6b9f-a1c6-4f89-8294-1e54a629ec25
+:END:
+#+title: SIG_DFL
+#+date: [2024-11-03 Sun 10:57]
+#+startup: overview
+
+=SIG_DFL= is a constant used in programming with the C and C++ languages (and others that use POSIX signal handling) to specify the default action for a particular signal.
+
+When you use =SIG_DFL= as the handler in the =signal()= function or =sigaction()= system call, it instructs the operating system to revert to the default behavior for that signal.
+
+Each signal has a default action associated with it, such as terminating the process, ignoring the signal, or stopping the process.
+
+Using =SIG_DFL= allows you to restore the default handling after it has been changed.

@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       79c685dc-f0e3-452c-bb49-004e76e2d178
+:END:
+#+title: SIGSTOP
+#+date: [2024-11-03 Sun 10:44]
+#+startup: overview
+
+=SIGSTOP= is a signal used in Unix and Unix-like operating systems to stop (pause) a process.
+
+Unlike other signals that can be caught or ignored by the process, =SIGSTOP= cannot be caught, blocked, or ignored.
+
+When a process receives this signal, it is forcibly stopped by the operating system.
+
+You can later resume the process by sending it a =SIGCONT= signal.
+
+This is often used in job control within shells to stop and resume processes.

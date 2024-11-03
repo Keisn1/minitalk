@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       efdc6328-8124-4005-9648-2ea28b0d1050
+:END:
+#+title: sigemptyset function
+#+date: [2024-11-03 Sun 11:14]
+#+startup: overview
+
+#+begin_src c
+int sigemptyset(sigset_t *set);
+#+end_src
+- initialises signal set given by set to empty

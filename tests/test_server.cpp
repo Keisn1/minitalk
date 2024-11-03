@@ -1,5 +1,3 @@
-#include "gtest/gtest.h"
-#include <cstring>
 #include <signal.h>
 #include <gtest/gtest.h>
 #include <unistd.h>
@@ -13,22 +11,19 @@ struct serverTestParameter {
 	const char* want;
 };
 
-class serverTest : public ::testing::TestWithParam<serverTestParameter> {
-protected:
-	void SetUp() override {
-		signal_handler(-1);
-	}
-};
+class serverTest : public ::testing::TestWithParam<serverTestParameter> {};
 
 void send_char(char c) {
 	int count = 0;
 	while (count < 8) {
-		unsigned char bit = c >> count & 1;
-		if (bit)
+		usleep(100);
+		unsigned char bit = (c >> count) & 1;
+		if (bit) {
 			kill(getppid(), SIGUSR1);
-		else
+		} else {
 			kill(getppid(), SIGUSR2);
-		usleep(42);
+		}
+		usleep(100);
 		count++;
 	}
 }
@@ -36,8 +31,8 @@ void send_char(char c) {
 TEST_P(serverTest, testStrings) {
 	serverTestParameter params = GetParam();
 
-	signal(SIGUSR1, signal_handler); // signal_handler is the src-code function
-	signal(SIGUSR2, signal_handler); // signal_handler is the src-code function
+	signal(SIGUSR1, string_handler); // signal_handler is the src-code function
+	signal(SIGUSR2, string_handler); // signal_handler is the src-code function
 
 	testing::internal::CaptureStdout();
 
@@ -56,28 +51,23 @@ TEST_P(serverTest, testStrings) {
 		int status;
 		waitpid(pid, &status, 0);  // Wait for child process to finish
 		std::string stdout = testing::internal::GetCapturedStdout();
-        EXPECT_STREQ(params.want, stdout.c_str()) << "Signal handler was not called or message incorrect";
+		EXPECT_STREQ(params.want, stdout.c_str()) << "Signal handler was not called or message incorrect";
 	}
 }
 
 INSTANTIATE_TEST_SUITE_P(serverTests, serverTest,
 						 testing::Values(
-							 serverTestParameter{"!", "!"},
-							 serverTestParameter{"x", "x"},
-							 serverTestParameter{"x!", "x!"},
-							 serverTestParameter{"abc", "abc"},
-							 serverTestParameter{"Ich bin toll", "Ich bin toll"}
+							 serverTestParameter{"!", "!\n"},
+							 serverTestParameter{"x", "x\n"},
+							 serverTestParameter{"x!", "x!\n"},
+							 serverTestParameter{"abc", "abc\n"},
+							 serverTestParameter{"Ich bin toll", "Ich bin toll\n"}
 							 ));
 
 ////////////////////////////////////////////////////
 // test messages that are not multiple of 8 bits
 
-class testIncompleteStrings : public ::testing::TestWithParam<serverTestParameter> {
-protected:
-	void SetUp() override {
-		signal_handler(-1);
-	}
-};
+class testIncompleteStrings : public ::testing::TestWithParam<serverTestParameter> {};
 
 void sigusr1_n_time(int n) {
 	int count = 0;
@@ -90,8 +80,8 @@ void sigusr1_n_time(int n) {
 TEST_P(testIncompleteStrings, testIncompleteStrings) {
 	serverTestParameter params = GetParam();
 
-	signal(SIGUSR1, signal_handler); // signal_handler is the src-code function
-	signal(SIGUSR2, signal_handler); // signal_handler is the src-code function
+	signal(SIGUSR1, string_handler); // signal_handler is the src-code function
+	signal(SIGUSR2, string_handler); // signal_handler is the src-code function
 
 	testing::internal::CaptureStdout();
 
@@ -102,7 +92,7 @@ TEST_P(testIncompleteStrings, testIncompleteStrings) {
 		char* msg = (char*)params.msg;
 		while (*msg) {
 			unsigned char c = *msg;
-				sigusr1_n_time(c - '0');
+			sigusr1_n_time(c - '0');
 			msg++;
 		}
 		_exit(0);  // Exit child process
