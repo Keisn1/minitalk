@@ -54,22 +54,3 @@ void	send_char(char c, pid_t pid)
 	}
 }
 
-int	main(int argc, char *argv[])
-{
-	pid_t	server_pid;
-	char	*msg;
-
-	(void)argc;
-	signal(SIGUSR1, &signal_handler);
-	ft_putnbr_fd(getpid(), STDOUT_FILENO);
-	server_pid = ft_atoi(argv[1]);
-	msg = argv[2];
-	while (*msg)
-	{
-		send_char(*msg, server_pid);
-		usleep(42);
-		msg++;
-	}
-	send_char(*msg, server_pid);
-	return (0);
-}

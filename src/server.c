@@ -61,13 +61,14 @@ char	*update_buffer(size_t length, unsigned int signals_received, bool reset)
 	return (buffer);
 }
 
-void	string_handler(int sig, siginfo_t *siginfo, void *)
+void	string_handler(int sig, siginfo_t *siginfo, void *ucontext)
 {
 	char				*buffer;
 	static size_t		length = 0;
 	static unsigned int	signals_received = 0;
 	pid_t				client_pid;
 
+	(void)ucontext;
 	buffer = update_buffer(length, signals_received, false);
 	if (sig == SIGUSR1)
 	{

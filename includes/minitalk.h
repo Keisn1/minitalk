@@ -8,7 +8,7 @@ extern "C"
 {
 # endif
 
-	void string_handler(int sig, siginfo_t * siginfo, void*);
+	void string_handler(int sig, siginfo_t * siginfo, void* ucontext);
 	void interrupt_handler(int signal);
 	void send_char(char c, pid_t pid);
 

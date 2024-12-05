@@ -13,7 +13,7 @@ class serverTest : public ::testing::TestWithParam<serverTestParameter> {
 protected:
   void SetUp() override {
 		struct sigaction action;
-		action.sa_handler = &string_handler;
+		action.sa_sigaction = &string_handler;
 		action.sa_flags = 0;
 		sigemptyset(&action.sa_mask);
 		sigaction(SIGUSR1, &action, NULL);
