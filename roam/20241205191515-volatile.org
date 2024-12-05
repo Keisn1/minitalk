@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       7355d518-7453-41aa-adf8-db566f6e9ea5
+:END:
+#+title: volatile
+#+date: [2024-12-05 Do 19:15]
+#+startup: overview
+
+- used to tell the compiler that a variable's value may change at any time, without any action being taken by the code the compiler finds nearby
+  - important because it prevents the compiler from applying certain optimizations that could assume the value does not change when the code is executing
+- ensure that every read or write to that variable is actually performed and not optimized away or cached by the compiler
+
+Typical use cases for =volatile= include:
+
+1. *Memory-mapped peripheral registers*
+   - hardware can change the value of a register independently of the program.
+2. *Global variables modified by an interrupt service routine*
+   - meaning the variable can change asynchronously with the main program flow.
+3. *Multithreading*
+   - where a variable might be changed by another thread.

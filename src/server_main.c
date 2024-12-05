@@ -20,7 +20,7 @@ int	main(void)
 {
 	struct sigaction action;
 	action.sa_sigaction = &string_handler;
-    action.sa_flags = SA_SIGINFO;
+	action.sa_flags = SA_SIGINFO;
 	sigemptyset(&action.sa_mask);
 	sigaction(SIGUSR1, &action, NULL);
 	sigaction(SIGUSR2, &action, NULL);

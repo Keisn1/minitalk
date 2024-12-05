@@ -15,9 +15,9 @@
       "./run_tests",
       "server.c"
     ],
-    "directory": "/home/kay/workspace/minitalk",
-    "file": "/home/kay/workspace/minitalk/server.c",
-    "output": "/home/kay/workspace/minitalk/run_tests"
+    "directory": "/home/kfreyer/workspace/minitalk",
+    "file": "/home/kfreyer/workspace/minitalk/server.c",
+    "output": "/home/kfreyer/workspace/minitalk/run_tests"
   },
   {
     "arguments": [
@@ -35,9 +35,9 @@
       "./run_tests",
       "tests/test_main.cpp"
     ],
-    "directory": "/home/kay/workspace/minitalk",
-    "file": "/home/kay/workspace/minitalk/tests/test_main.cpp",
-    "output": "/home/kay/workspace/minitalk/run_tests"
+    "directory": "/home/kfreyer/workspace/minitalk",
+    "file": "/home/kfreyer/workspace/minitalk/tests/test_main.cpp",
+    "output": "/home/kfreyer/workspace/minitalk/run_tests"
   },
   {
     "arguments": [
@@ -55,8 +55,8 @@
       "./run_tests",
       "tests/test_server.cpp"
     ],
-    "directory": "/home/kay/workspace/minitalk",
-    "file": "/home/kay/workspace/minitalk/tests/test_server.cpp",
-    "output": "/home/kay/workspace/minitalk/run_tests"
+    "directory": "/home/kfreyer/workspace/minitalk",
+    "file": "/home/kfreyer/workspace/minitalk/tests/test_server.cpp",
+    "output": "/home/kfreyer/workspace/minitalk/run_tests"
   }
 ]
