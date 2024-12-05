@@ -20,6 +20,36 @@
   "file": "/home/kfreyer/workspace/minitalk/tests/test_server.cpp"
 },
 {
+  "directory": "/home/kfreyer/workspace/minitalk/build",
+  "command": "/usr/bin/clang  -I/home/kfreyer/workspace/minitalk/includes -I/home/kfreyer/workspace/minitalk/libft  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/server.dir/src/client.c.o -c /home/kfreyer/workspace/minitalk/src/client.c",
+  "file": "/home/kfreyer/workspace/minitalk/src/client.c"
+},
+{
+  "directory": "/home/kfreyer/workspace/minitalk/build",
+  "command": "/usr/bin/clang  -I/home/kfreyer/workspace/minitalk/includes -I/home/kfreyer/workspace/minitalk/libft  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/server.dir/src/server.c.o -c /home/kfreyer/workspace/minitalk/src/server.c",
+  "file": "/home/kfreyer/workspace/minitalk/src/server.c"
+},
+{
+  "directory": "/home/kfreyer/workspace/minitalk/build",
+  "command": "/usr/bin/clang  -I/home/kfreyer/workspace/minitalk/includes -I/home/kfreyer/workspace/minitalk/libft  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/server.dir/run/server_main.c.o -c /home/kfreyer/workspace/minitalk/run/server_main.c",
+  "file": "/home/kfreyer/workspace/minitalk/run/server_main.c"
+},
+{
+  "directory": "/home/kfreyer/workspace/minitalk/build",
+  "command": "/usr/bin/clang  -I/home/kfreyer/workspace/minitalk/includes -I/home/kfreyer/workspace/minitalk/libft  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/client.dir/src/client.c.o -c /home/kfreyer/workspace/minitalk/src/client.c",
+  "file": "/home/kfreyer/workspace/minitalk/src/client.c"
+},
+{
+  "directory": "/home/kfreyer/workspace/minitalk/build",
+  "command": "/usr/bin/clang  -I/home/kfreyer/workspace/minitalk/includes -I/home/kfreyer/workspace/minitalk/libft  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/client.dir/src/server.c.o -c /home/kfreyer/workspace/minitalk/src/server.c",
+  "file": "/home/kfreyer/workspace/minitalk/src/server.c"
+},
+{
+  "directory": "/home/kfreyer/workspace/minitalk/build",
+  "command": "/usr/bin/clang  -I/home/kfreyer/workspace/minitalk/includes -I/home/kfreyer/workspace/minitalk/libft  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/client.dir/run/client_main.c.o -c /home/kfreyer/workspace/minitalk/run/client_main.c",
+  "file": "/home/kfreyer/workspace/minitalk/run/client_main.c"
+},
+{
   "directory": "/home/kfreyer/workspace/minitalk/build/_deps/googletest-build/googlemock",
   "command": "/usr/bin/clang++  -I/home/kfreyer/workspace/minitalk/build/_deps/googletest-src/googlemock/include -I/home/kfreyer/workspace/minitalk/build/_deps/googletest-src/googlemock -isystem /home/kfreyer/workspace/minitalk/build/_deps/googletest-src/googletest/include -isystem /home/kfreyer/workspace/minitalk/build/_deps/googletest-src/googletest -Wall -Wshadow -Wconversion -DGTEST_HAS_PTHREAD=1 -fexceptions -W -Wpointer-arith -Wreturn-type -Wcast-qual -Wwrite-strings -Wswitch -Wunused-parameter -Wcast-align -Wchar-subscripts -Winline -Wredundant-decls -std=c++14 -o CMakeFiles/gmock.dir/src/gmock-all.cc.o -c /home/kfreyer/workspace/minitalk/build/_deps/googletest-src/googlemock/src/gmock-all.cc",
   "file": "/home/kfreyer/workspace/minitalk/build/_deps/googletest-src/googlemock/src/gmock-all.cc"

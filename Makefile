@@ -43,9 +43,6 @@ $(CLIENT): $(CLIENT_SRC_FILES)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-$(TEST_TARGET): $(TEST_SRC_FILES) $(TEST_OBJ_FILES)
-	$(CXX) $(CXXFLAGS)  $(TEST_OBJ_FILES) $(TEST_SRC_FILES) -o $(TEST_TARGET) $(INCLUDES) $(FSANITIZE) $(GTEST) $(LIBFT)
-
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
@@ -56,18 +53,23 @@ clean: libft-clean
 	rm -f $(TEST_TARGET) $(OBJ_FILES)
 
 fclean: clean
+	rm -rf build
 	rm -f $(SERVER)
 	rm -f $(CLIENT)
 
 re: fclean all
 
 test:
-	cmake -S . -B build && \
+	cmake -S . -B build -DBUILD_TEST=ON && \
 	cmake --build build && \
 	./build/run_tests --gtest_repeat=10
 
+build:
+	cmake -S . -B build -DBUILD_TEST=OFF -DBUILD_MINITALK=ON && \
+	cmake --build build
+
 compile_commands:
-	cmake -S . -B build && \
+	cmake -S . -B build -DBUILD_MINITALK=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && \
 	rm compile_commands.json && \
 	cp build/compile_commands.json ./compile_commands.json
 
@@ -97,7 +99,7 @@ test-src-files:
 test-obj-files:
 	@echo $(TEST_OBJ_FILES)
 
-.PHONY: test libft libft-re libft-clean libft-fclean bear src-files obj-files all
+.PHONY: test libft libft-re libft-clean libft-fclean bear src-files obj-files all build
 
 
 # end

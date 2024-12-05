@@ -16,22 +16,39 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
+option(BUILD_TEST "Build tests" ON)
+option(BUILD_PUSH_SWAP "Build minitalk (for_compile_commands)" OFF)
+
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror -Wextra -fsanitize=address")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -Wextra -fsanitize=address")
 
 add_subdirectory(libft)
 
-file(GLOB MINITALK_SOURCES "src/*.c")
-file(GLOB TEST_FILES "tests/*.cpp")
-set(TEST_NAME "run_tests")
+if(BUILD_TEST)
+  file(GLOB MINITALK_SOURCES "src/*.c")
+  file(GLOB TEST_FILES "tests/*.cpp")
+  set(TEST_NAME "run_tests")
 
-add_executable(${TEST_NAME} ${MINITALK_SOURCES} ${TEST_FILES})
+  add_executable(${TEST_NAME} ${MINITALK_SOURCES} ${TEST_FILES})
 
-target_link_libraries(${TEST_NAME} gtest gtest_main pthread ft)
+  target_link_libraries(${TEST_NAME} gtest gtest_main pthread ft)
 
-target_include_directories(${TEST_NAME} PRIVATE includes)
-target_include_directories(${TEST_NAME} PRIVATE libft)
-target_include_directories(${TEST_NAME} PRIVATE ${gtest_SOURCE_DIR}/googletest/include)
+  target_include_directories(${TEST_NAME} PRIVATE includes)
+  target_include_directories(${TEST_NAME} PRIVATE libft)
+  target_include_directories(${TEST_NAME} PRIVATE ${gtest_SOURCE_DIR}/googletest/include)
 
-include(GoogleTest)
-gtest_discover_tests(${TEST_NAME})
+  include(GoogleTest)
+  gtest_discover_tests(${TEST_NAME})
+endif()
+
+
+if(BUILD_MINITALK)
+  add_executable(server ${MINITALK_SOURCES} run/server_main.c)
+  add_executable(client ${MINITALK_SOURCES} run/client_main.c)
+  target_link_libraries(server ft)
+  target_link_libraries(client ft)
+  target_include_directories(server PRIVATE includes)
+  target_include_directories(server PRIVATE libft)
+  target_include_directories(client PRIVATE includes)
+  target_include_directories(client PRIVATE libft)
+endif()
