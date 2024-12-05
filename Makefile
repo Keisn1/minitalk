@@ -61,8 +61,15 @@ fclean: clean
 
 re: fclean all
 
-test: $(TEST_TARGET)
-	- $(TEST_TARGET) --gtest_repeat=10
+test:
+	cmake -S . -B build && \
+	cmake --build build && \
+	./build/run_tests --gtest_repeat=10
+
+compile_commands:
+	cmake -S . -B build && \
+	rm compile_commands.json && \
+	cp build/compile_commands.json ./compile_commands.json
 
 libft:
 	$(MAKE) -C libft

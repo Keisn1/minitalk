@@ -1,8 +1,4 @@
-#include <signal.h>
-#include <gtest/gtest.h>
-#include <unistd.h>
-#include "minitalk.h"
-
+#include "test_minitalk.hpp"
 
 struct serverTestParameter {
 	const char* msg;

@@ -11,9 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <signal.h>
-#include <stdbool.h>
-#include <unistd.h>
+#include "minitalk.h"
 
 void	*ft_realloc(void *ptr, size_t size, size_t cpy_size)
 {
