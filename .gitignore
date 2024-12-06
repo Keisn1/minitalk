@@ -6,3 +6,4 @@
 /client
 /server
 /build/
+/tests/__pycache__/

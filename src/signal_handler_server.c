@@ -14,15 +14,6 @@
 #include "minitalk.h"
 
 
-void	interrupt_handler(int signal)
-{
-	if (signal == SIGTERM || signal == SIGINT)
-	{
-		ft_putendl_fd((char *)"Goodbye.", STDOUT_FILENO);
-		exit(0);
-	}
-}
-
 void	*ft_realloc(void *ptr, size_t size, size_t cpy_size)
 {
 	void	*new_ptr;
@@ -68,6 +59,16 @@ char	*update_buffer(size_t length, unsigned int signals_received, bool reset)
 	}
 	return (buffer);
 }
+
+void	interrupt_handler(int signal)
+{
+	if (signal == SIGTERM || signal == SIGINT)
+	{
+		ft_putendl_fd((char *)"Goodbye.", STDOUT_FILENO);
+		exit(0);
+	}
+}
+
 
 void	string_handler(int sig, siginfo_t *siginfo, void *ucontext)
 {

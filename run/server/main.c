@@ -15,12 +15,19 @@
 
 int	main(void)
 {
-	struct sigaction action;
-	action.sa_sigaction = &string_handler;
-	action.sa_flags = SA_SIGINFO;
-	sigemptyset(&action.sa_mask);
-	sigaction(SIGUSR1, &action, NULL);
-	sigaction(SIGUSR2, &action, NULL);
+	struct sigaction sa_msg;
+	sa_msg.sa_sigaction = &string_handler;
+	sa_msg.sa_flags = SA_SIGINFO;
+	sigemptyset(&sa_msg.sa_mask);
+	sigaction(SIGUSR1, &sa_msg, NULL);
+	sigaction(SIGUSR2, &sa_msg, NULL);
+
+	struct sigaction sa_shutdown;
+	sa_shutdown.sa_handler = &interrupt_handler;
+	sa_shutdown.sa_flags = 0;
+	sigemptyset(&sa_shutdown.sa_mask);
+	sigaction(SIGTERM, &sa_shutdown, NULL);
+	sigaction(SIGINT, &sa_shutdown, NULL);
 
 	ft_putstr_fd((char *)"Server pid: ", STDOUT_FILENO);
 	ft_putnbr_fd(getpid(), STDOUT_FILENO);

@@ -25,8 +25,6 @@ struct sigaction {
     - This function receives the signal number as its only argument
 
 * [[id:0f08ce3f-b0f1-41c6-8d1b-0751cdacb6a5][sa_flags]]
-- if SA_SIGINFO is specified then, =sa_sigaction= is used instead of =sa_handler=
-- specifies flags, that modify the behavior of the signal
 
 * sa_mask ([[id:832fb147-3abc-4254-a909-18d8dc295ddc][sigset_t]]) (blocking signals)
 - sa_mask is of type =sigset_t= ([[id:832fb147-3abc-4254-a909-18d8dc295ddc][modifying sigset_t]])

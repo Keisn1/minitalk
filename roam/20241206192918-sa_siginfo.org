@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       905bd552-2bf0-4dc8-bda5-1eb6e5e41cc6
+:END:
+#+title: SA_SIGINFO
+#+date: [2024-12-06 Fr 19:29]
+#+startup: overview
+
+- if SA_SIGINFO is specified then, =sa_sigaction= is used instead of =sa_handler=

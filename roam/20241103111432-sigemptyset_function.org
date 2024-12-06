@@ -8,5 +8,6 @@
 #+begin_src c
 int sigemptyset(sigset_t *set);
 #+end_src
+
 - initialises signal set given by set to empty
 - return 0 on success and -1 on error

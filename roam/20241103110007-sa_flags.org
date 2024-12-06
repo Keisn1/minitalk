@@ -5,6 +5,7 @@
 #+date: [2024-11-03 Sun 11:00]
 #+startup: overview
 
+
 - specifies flags, that modify the behavior of the signal
 - formed bitwise OR (=|=) of zero of more of the Constants
   - [[id:51fee934-cc5c-45b0-8c71-130ca12b8937][SA_NOCLDSTOP]] (NoChildStop)
@@ -14,6 +15,6 @@
   - SA_RESETHAND
   - SA_RESTART
   - SA_RESTORER
-  - SA_SIGINFO (since Linux 2.2)
+  - [[id:905bd552-2bf0-4dc8-bda5-1eb6e5e41cc6][SA_SIGINFO]] (since Linux 2.2)
   - SA_UNSUPPORTED (since Linux 5.11)
   - SA_EXPOSE_TAGBITS (since Linux 5.11)

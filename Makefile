@@ -14,7 +14,7 @@ CFLAGS := -Wall -Werror -Wextra
 
 INCLUDES := -Ilibft -Iincludes
 LIBFT := -Llibft -lft
-FSANITIZE := -fsanitize=address
+FSANITIZE :=
 
 SRC_FILES := $(wildcard $(SRC_DIR)/*.c)
 OBJ_FILES := $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
@@ -35,10 +35,10 @@ all: libft $(SERVER) $(CLIENT)
 $(NAME): libft $(SERVER) $(CLIENT)
 
 $(SERVER): $(SERVER_SRC_FILES)
-	$(CC) $(CFLAGS) $^ -o $(SERVER) $(LIBFT) $(INCLUDES)
+	$(CC) $(CFLAGS) $(FSANITIZE) $^ -o $(SERVER) $(LIBFT) $(INCLUDES)
 
 $(CLIENT): $(CLIENT_SRC_FILES)
-	$(CC) $(CFLAGS) $^ -o $(CLIENT) $(LIBFT) $(INCLUDES)
+	$(CC) $(CFLAGS) $(FSANITIZE) $^ -o $(CLIENT) $(LIBFT) $(INCLUDES)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
@@ -60,10 +60,20 @@ fclean: clean
 
 re: fclean all
 
-test:
+test: unittest integration-test integration-test-valgrind
+
+unittest:
 	cmake -S . -B build -DBUILD_TEST=ON && \
 	cmake --build build && \
 	./build/run_tests --gtest_repeat=10
+
+integration-test:
+	make && \
+	pytest tests/test_integration.py::test_integration
+
+integration-test-valgrind:
+	make && \
+	pytest tests/test_integration.py::test_integration_valgrind
 
 build:
 	cmake -S . -B build -DBUILD_TEST=OFF -DBUILD_MINITALK=ON && \
