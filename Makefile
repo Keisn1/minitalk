@@ -6,14 +6,11 @@
 
 SRC_DIR := src
 OBJ_DIR := obj
+BUILD_DIR := build
 TESTS_DIR := tests
 
 CC := cc
 CFLAGS := -Wall -Werror -Wextra
-
-CXX := g++
-CXXFLAGS := -Wall -Werror -Wextra
-GTEST := -lgtest -lgtest_main -pthread
 
 INCLUDES := -Ilibft -Iincludes
 LIBFT := -Llibft -lft
@@ -21,18 +18,21 @@ FSANITIZE := -fsanitize=address
 
 SRC_FILES := $(wildcard $(SRC_DIR)/*.c)
 OBJ_FILES := $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
-SERVER_SRC_FILES := $(wildcard $(SRC_DIR)/server*.c)
-CLIENT_SRC_FILES := $(wildcard $(SRC_DIR)/client*.c)
+SERVER_SRC_FILES := $(wildcard $(SRC_DIR)/*_server.c) run/server/main.c
+CLIENT_SRC_FILES := $(wildcard $(SRC_DIR)/*_client.c) run/client/main.c
 
 TEST_OBJ_FILES := $(filter-out %_main.o, $(OBJ_FILES))
 TEST_SRC_FILES := $(wildcard $(TESTS_DIR)/*.cpp)
 
+NAME := minitalk
 SERVER := server
 CLIENT := client
 
 TEST_TARGET := ./run_tests
 
-all: $(SERVER) $(CLIENT)
+all: libft $(SERVER) $(CLIENT)
+
+$(NAME): libft $(SERVER) $(CLIENT)
 
 $(SERVER): $(SERVER_SRC_FILES)
 	$(CC) $(CFLAGS) $^ -o $(SERVER) $(LIBFT) $(INCLUDES)
@@ -53,9 +53,10 @@ clean: libft-clean
 	rm -f $(TEST_TARGET) $(OBJ_FILES)
 
 fclean: clean
-	rm -rf build
 	rm -f $(SERVER)
 	rm -f $(CLIENT)
+	rm -rf $(OBJ_DIR)
+	rm -rf $(BUILD_DIR)
 
 re: fclean all
 
@@ -66,10 +67,11 @@ test:
 
 build:
 	cmake -S . -B build -DBUILD_TEST=OFF -DBUILD_MINITALK=ON && \
-	cmake --build build
+	cmake --build build && \
+	mv build/server server && mv build/client client
 
 compile_commands:
-	cmake -S . -B build -DBUILD_MINITALK=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && \
+	cmake -S . -B build -DBUILD_MINITALK=ON -DBUILD_TEST=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && \
 	rm compile_commands.json && \
 	cp build/compile_commands.json ./compile_commands.json
 
@@ -87,8 +89,11 @@ libft-fclean:
 
 bear: $(TEST_TARGET)
 
-src-files:
-	@echo $(SRC_FILES)
+server-src-files:
+	@echo $(SERVER_SRC_FILES)
+
+client-src-files:
+	@echo $(CLIENT_SRC_FILES)
 
 obj-files:
 	@echo $(OBJ_FILES)
@@ -99,7 +104,7 @@ test-src-files:
 test-obj-files:
 	@echo $(TEST_OBJ_FILES)
 
-.PHONY: test libft libft-re libft-clean libft-fclean bear src-files obj-files all build
+.PHONY: test libft libft-re libft-clean libft-fclean bear server-src-files client-src-files obj-files all build
 
 
 # end

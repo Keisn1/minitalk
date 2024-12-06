@@ -43,10 +43,15 @@ endif()
 
 
 if(BUILD_MINITALK)
-  add_executable(server ${MINITALK_SOURCES} run/server_main.c)
-  add_executable(client ${MINITALK_SOURCES} run/client_main.c)
+  file(GLOB MINITALK_SERVER_SOURCES "src/*_server.c")
+  file(GLOB MINITALK_CLIENT_SOURCES "src/*_client.c")
+
+  add_executable(server ${MINITALK_SERVER_SOURCES} run/server/main.c)
+  add_executable(client ${MINITALK_CLIENT_SOURCES} run/client/main.c)
+
   target_link_libraries(server ft)
   target_link_libraries(client ft)
+
   target_include_directories(server PRIVATE includes)
   target_include_directories(server PRIVATE libft)
   target_include_directories(client PRIVATE includes)
