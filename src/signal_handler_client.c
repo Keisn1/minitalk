@@ -51,3 +51,13 @@ void	send_char(char c, pid_t pid)
 	}
 }
 
+
+void	send_msg(char *msg, pid_t server_pid) {
+	while (*msg)
+	{
+		send_char(*msg, server_pid);
+		usleep(42);
+		msg++;
+	}
+	send_char(*msg, server_pid);
+}

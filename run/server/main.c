@@ -12,9 +12,6 @@
 
 #include "minitalk.h"
 #include "libft.h"
-#include <signal.h>
-#include <stdbool.h>
-#include <unistd.h>
 
 int	main(void)
 {

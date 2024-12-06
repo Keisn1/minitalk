@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       6fd6386b-8504-4fcd-8efa-816b24a1d6a9
+:END:
+#+title: SIGTSTP
+#+date: [2024-12-06 Fr 16:21]
+#+startup: overview
+
+Signal temporarily stop
+
+- =SIGTSTP= is a signal sent to a process to request it to stop (pause) temporarily
+  - typically generated when the user presses =Ctrl+Z= in a terminal
+  - The process can be resumed later with a =SIGCONT= signal

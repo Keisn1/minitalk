@@ -5,9 +5,10 @@
 #+date: [2024-11-03 Sun 08:17]
 #+startup: overview
 
-The =pause()= function in the =unistd.h= header file is a POSIX function that suspends the calling process until it receives a signal.
+- suspends the calling process until it receives a signal
 
-The function doesn't take any parameters and its typical usage is in a loop where signals are handled, often used in daemon or signal-handling code.
+- doesn't take any parameters and its typical usage is in a loop where signals are handled
+- often used in daemon or signal-handling code
 
 #+begin_src c
 #include <stdio.h>
@@ -38,8 +39,7 @@ int main() {
 
 In this example, =pause()= is used to wait until the program receives a signal, after which the signal handler is executed, and the program continues.
 
-- Use [[id:911a3c63-9913-4e33-8a52-b51d690797aa][ps]] to locate the PID: =ps aux | grep your_program_name=.
-- Send a termination signal ([[id:c68e0b56-9a40-499b-a65c-cda0b5708258][SIGTERM]]): =kill -SIGTERM <PID>= or =kill <PID>=.
+- Use ps command to locate the PID: =ps aux | grep your_program_name=.
+- Send a termination signal (SIGTERM): =kill -SIGTERM <PID>= or =kill <PID>=.
 - If it doesn't terminate, use: =kill -SIGKILL <PID>=.
-
-Now, when the program receives a =SIGTERM= signal, it will exit gracefully. Use =kill -SIGTERM <PID>= to terminate it.
+- when the program receives a =SIGTERM= signal, it will exit gracefully. Use =kill -SIGTERM <PID>= to terminate it.

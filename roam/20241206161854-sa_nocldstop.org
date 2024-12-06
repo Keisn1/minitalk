@@ -1,0 +1,63 @@
+:PROPERTIES:
+:ID:       51fee934-cc5c-45b0-8c71-130ca12b8937
+:END:
+#+title: SA_NOCLDSTOP
+#+date: [2024-12-06 Fr 16:18]
+#+startup: overview
+
+- used with the =sigaction= function in the context of handling the =SIGCHLD= signal
+- When =SA_NOCLDSTOP= is set, the =SIGCHLD= signal is not generated when child processes stop (e.g., receive a =SIGSTOP= or =SIGTSTP= signal)
+
+#+begin_src c
+#include <stdio.h>
+#include <stdlib.h>
+#include <signal.h>
+#include <unistd.h>
+
+void sigchld_handler(int signum) {
+    // Custom handling code for when a child process terminates
+    printf("Received SIGCHLD signal\n");
+    // You may want to call wait() or waitpid() here to clean up child processes
+}
+
+int main() {
+    struct sigaction sa;
+
+    // Zero out the sigaction structure
+    sa.sa_handler = sigchld_handler;  // Set the signal handler
+    sa.sa_flags = SA_NOCLDSTOP;       // Set the SA_NOCLDSTOP flag
+    sigemptyset(&sa.sa_mask);         // No additional signals to block
+
+    // Set the action for SIGCHLD
+    if (sigaction(SIGCHLD, &sa, NULL) == -1) {
+        perror("sigaction");
+        exit(EXIT_FAILURE);
+    }
+
+    // Fork a child process as an example
+    pid_t pid = fork();
+    if (pid == 0) {
+        // In the child process
+        printf("Child process with PID %d\n", getpid());
+        _exit(0); // Terminate the child process
+    } else if (pid > 0) {
+        // In the parent process
+        printf("Parent process with PID %d\n", getpid());
+    } else {
+        perror("fork");
+        exit(EXIT_FAILURE);
+    }
+
+    // Wait for some time to receive signals
+    sleep(5);
+
+    return 0;
+}
+#+end_src
+
+- In this example, the =sigaction= structure is configured to handle the =SIGCHLD= signal, and the =SA_NOCLDSTOP= flag is set to prevent the signal from being raised when child processes stop. This way, the handler is invoked only when child processes terminate
+
+- The =SA_NOCLDSTOP= flag prevents the =SIGCHLD= signal from being delivered when child processes stop (e.g., upon receiving =SIGSTOP= or =SIGTSTP=).
+  - it does not prevent =SIGCHLD= from being delivered when a child process terminates
+  - With =SA_NOCLDSTOP= set, the handler will still be invoked when child processes terminate, but not when they stop
+  - This allows a program to clean up after child processes that have exited without being notified of stop events

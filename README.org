@@ -19,7 +19,6 @@ Minitalk project from 42 core curriculum
   - sigaction
 * Mandatory part
 - Server-client communication program
-
 ** Server
 - must be launched first
 - must display its PID
@@ -32,8 +31,24 @@ Minitalk project from 42 core curriculum
   - server PID
   - string that should be sent
 - must communicate the string (given as parameter) to the server
+- quick response from the server
 
 ** Constraints
 - communication only via UNIX signals
 - server needs to display the string instantly
 - can only use SIGUSR1 and SIGUSR2
+
+* Tests
+- [ ] strings sent
+  - [ ] empty string
+  - [ ] normal string
+  - [ ] long string
+  - [ ] non-ascii string
+  - [ ] unicode string
+- [ ] receive msgs from clients in a row
+
+- [ ] server shutdown
+  - [ ] handle termination with string: "Goodbye."
+
+- [ ] server acknowledges received message
+- [ ] unicode character support

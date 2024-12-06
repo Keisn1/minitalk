@@ -1,0 +1,27 @@
+:PROPERTIES:
+:ID:       0186198f-d361-46a5-b079-4681ec2eecfd
+:END:
+#+title: sending signals in C
+#+date: [2024-12-06 Fr 15:53]
+#+startup: overview
+
+
+To work with signals in a UNIX-like environment, you typically need to perform the following steps (e.g. =SIGUSR1=):
+
+1. *Signal Handling in a Program:*
+   - Use the [[id:849b510a-ea52-4129-9c3a-d57382ffee5c][signal()]] or [[id:27a65a29-3d91-4b9e-86c3-b31168910426][sigaction()]] system calls to define a custom handler function that will be executed when the process receives the =SIGUSR1= signal.
+
+2. *Sending the Signal:*
+   -
+   - You can send a =SIGUSR1= signal to a process using the =kill= command from the terminal or the [[id:78d0139d-68b5-453c-ac56-036cd091ed26][kill()]] system call from another program.
+   - Using the command line, the syntax is:
+     #+begin_src
+     kill -USR1 <pid>
+     #+end_src
+     Replace =<pid>= with the process ID of the target process.
+
+3. *Handling in Multi-threaded Programs:*
+   - If your program is multi-threaded, ensure you configure signal handling correctly as signals are delivered to the process, and you may need to designate a specific thread to handle them.
+
+4. *From Within the Same Program:*
+   - A process can send a signal to itself using the [[id:69a88a1f-6e64-47ef-aa7c-5c4c8779ff86][raise]] function.

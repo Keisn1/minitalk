@@ -5,23 +5,25 @@
 #+date: [2024-11-01 Fri 19:06]
 #+startup: overview
 
+- a process is an instance of a running program
+- fundamental concept of UNIX-like operating systems
+  - includes everything needed to execute the program
+    - such as executable code
+    - associated resources
+    - process control block that contains metadata about the process
 
-* what is a process in UNIX?
+- Key attributes of a UNIX process include:
+  1. *Process ID (PID):* A unique identifier for each process.
+  2. *Memory Address Space:* Contains the program code, data, and stack.
+  3. *Execution State:* Indicates if the process is running, waiting, etc.
+  4. *File Descriptors:* References to open files used by the process.
+  5. *Context:* Includes CPU registers, program counter, and environment variables.
 
-In UNIX, a process is an instance of a running program. It is a fundamental concept of UNIX-like operating systems and includes everything needed to execute the program, such as executable code, associated resources, and a process control block that contains metadata about the process.
+- can create child processes using system calls like =fork()=
+- can execute different programs using =exec()= family calls
+- OS manages processes by
+  - scheduling them for execution on the CPU
+  - handling process switching
+  - managing process communication and synchronization
 
-Key attributes of a UNIX process include:
-
-1. *Process ID (PID):* A unique identifier for each process.
-
-2. *Memory Address Space:* Contains the program code, data, and stack.
-
-3. *Execution State:* Indicates if the process is running, waiting, etc.
-
-4. *File Descriptors:* References to open files used by the process.
-
-5. *Context:* Includes CPU registers, program counter, and environment variables.
-
-Processes in UNIX can create child processes using system calls like =fork()=, and they can execute different programs using =exec()= family calls. The operating system manages processes by scheduling them for execution on the CPU, handling process switching, and managing process communication and synchronization.
-
-[[id:911a3c63-9913-4e33-8a52-b51d690797aa][ps command]]
+- related UNIX command: [[id:911a3c63-9913-4e33-8a52-b51d690797aa][ps command]]

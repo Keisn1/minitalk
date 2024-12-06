@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       156a6d79-9c3a-4bd1-abca-15d21cf70c1f
+:END:
+#+title: SIGCONT
+#+date: [2024-12-06 Fr 16:22]
+#+startup: overview
+
+- used to continue the execution of a process that has been stopped
+  - such as by =SIGSTOP= or =SIGTSTP=
+  - can be sent to a process to resume its execution after being paused
+
+- Unlike some signals, =SIGCONT= always causes the process to continue regardless of its previous state and *cannot be ignored*

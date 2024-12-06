@@ -7,7 +7,6 @@
 
 
 * What are UNIX signals?
-
 - UNIX signals are software interrupts
 - provide a way for [[id:fdafc7dd-2495-46da-bfdf-d17c3199ca72][processes]] to be notified of and respond to various events
 - allowing for inter-process communication and handling of asynchronous events
@@ -27,5 +26,8 @@
 - [[id:1f65227a-4ac7-4e03-8a6e-794fa7df7115][SIGCHLD]]
 - [[id:fdff1c81-a2ab-4a09-ae11-36f512a5fb8f][SIGUSR1]]
 - [[id:79c685dc-f0e3-452c-bb49-004e76e2d178][SIGSTOP]]
-* [[id:27a65a29-3d91-4b9e-86c3-b31168910426][sigaction function]]
-* [[id:849b510a-ea52-4129-9c3a-d57382ffee5c][signal function]]
+- [[id:6fd6386b-8504-4fcd-8efa-816b24a1d6a9][SIGTSTP]]
+- [[id:156a6d79-9c3a-4bd1-abca-15d21cf70c1f][SIGCONT]]
+
+* [[id:0186198f-d361-46a5-b079-4681ec2eecfd][sending signals in C]]
+

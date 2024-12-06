@@ -5,7 +5,6 @@
 #+date: [2024-11-03 Sun 10:53]
 #+startup: overview
 
-Something like
 #+begin_src c
 struct sigaction {
         void     (*sa_handler)(int);
@@ -19,7 +18,7 @@ struct sigaction {
 !!! Do not asign both to ~sa_handler~ and ~sa_sigaction~ !!!
 
 * sa_handler (sigaction_handler)
-- action associated with [[id:aefcf767-8a38-46ee-92f7-c58bef165130][signum]]
+- action associated with signum
   - [[id:c13b6b9f-a1c6-4f89-8294-1e54a629ec25][SIG_DFL]]
   - [[id:9b875148-2b6d-419e-8487-a01e691e59f7][SIG_IGN]]
   - A pointer to a signal handling function
