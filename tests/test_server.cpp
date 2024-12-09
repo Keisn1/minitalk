@@ -46,12 +46,12 @@ TEST_P(serverTest, testStrings) {
 
 INSTANTIATE_TEST_SUITE_P(serverTests, serverTest,
 						 testing::Values(
-							 serverTestParameter{"!", "!\n"},
-							 serverTestParameter{"x", "x\n"},
-							 serverTestParameter{"x!", "x!\n"},
-							 serverTestParameter{"abc", "abc\n"},
-							 serverTestParameter{"Ich bin toll", "Ich bin toll\n"},
-							 serverTestParameter{"a;ldskjf asdkljfl;asjdf l;asjdfl;kjasl dfkkjasldfjl;aksjdfl;kkjas lkf asd flkaj sdlf;kkjalsdfj", "a;ldskjf asdkljfl;asjdf l;asjdfl;kjasl dfkkjasldfjl;aksjdfl;kkjas lkf asd flkaj sdlf;kkjalsdfj\n"}
+							 serverTestParameter{"!", "!"},
+							 serverTestParameter{"x", "x"},
+							 serverTestParameter{"x!", "x!"},
+							 serverTestParameter{"abc", "abc"},
+							 serverTestParameter{"Ich bin toll", "Ich bin toll"},
+							 serverTestParameter{"a;ldskjf asdkljfl;asjdf l;asjdfl;kjasl dfkkjasldfjl;aksjdfl;kkjas lkf asd flkaj sdlf;kkjalsdfj", "a;ldskjf asdkljfl;asjdf l;asjdfl;kjasl dfkkjasldfjl;aksjdfl;kkjas lkf asd flkaj sdlf;kkjalsdfj"}
 							 ));
 
 ////////////////////////////////////////////////////

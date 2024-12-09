@@ -69,7 +69,8 @@ unittest:
 
 integration-test:
 	make && \
-	pytest tests/test_integration.py::test_integration
+	pytest tests/test_integration.py::test_integration_multiple_messages && \
+	pytest tests/test_integration.py::test_integration_long_msg
 
 integration-test-valgrind:
 	make && \
