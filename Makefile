@@ -69,13 +69,13 @@ unittest:
 	./build/run_tests --gtest_repeat=10
 
 integration-test:
-	make && \
-	pytest tests/test_integration.py::test_integration_multiple_messages && \
-	pytest tests/test_integration.py::test_integration_long_msg
+	make FSANITIZE=-fsanitize=address && \
+	pytest tests/test_server.py::test_integration_multiple_messages && \
+	pytest tests/test_server.py::test_integration_long_msg
 
 integration-test-valgrind:
 	make && \
-	pytest tests/test_integration.py::test_integration_valgrind
+	pytest tests/test_server.py::test_integration_valgrind
 
 build:
 	cmake -S . -B build -DBUILD_TEST=OFF -DBUILD_MINITALK=ON && \

@@ -12,12 +12,12 @@
 
 #include "minitalk.h"
 
-volatile sig_atomic_t	server_signal_received = 0;
+volatile sig_atomic_t	g_server_signal_received = 0;
 
 void	signal_handler(int signal)
 {
 	(void)signal;
-	server_signal_received = 1;
+	g_server_signal_received = 1;
 }
 
 void	send_char(char c, pid_t pid)
@@ -32,31 +32,25 @@ void	send_char(char c, pid_t pid)
 		if (bit)
 		{
 			kill(pid, SIGUSR1);
-			while (server_signal_received == 0)
-			{
+			while (g_server_signal_received == 0)
 				pause();
-			}
-			server_signal_received = 0;
 		}
 		else
 		{
 			kill(pid, SIGUSR2);
-			while (server_signal_received == 0)
-			{
+			while (g_server_signal_received == 0)
 				pause();
-			}
-			server_signal_received = 0;
 		}
+		g_server_signal_received = 0;
 		count++;
 	}
 }
 
-
-void	send_msg(char *msg, pid_t server_pid) {
+void	send_msg(char *msg, pid_t server_pid)
+{
 	while (*msg)
 	{
 		send_char(*msg, server_pid);
-		usleep(42);
 		msg++;
 	}
 	send_char(*msg, server_pid);
