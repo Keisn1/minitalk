@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "minitalk.h"
+#include <unistd.h>
 
 volatile sig_atomic_t	g_server_signal_received = 0;
 

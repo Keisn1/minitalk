@@ -68,12 +68,20 @@ unittest:
 	cmake --build build && \
 	./build/run_tests --gtest_repeat=10
 
-integration-test:
+client-test:
+	make  && \
+	pytest  tests/test_client.py::test_client
+
+client-test-valgrind:
+	make && \
+	pytest tests/test_client.py
+
+server-test:
 	make FSANITIZE=-fsanitize=address && \
 	pytest tests/test_server.py::test_server_multiple_messages && \
 	pytest tests/test_server.py::test_server_long_msg
 
-integration-test-valgrind:
+server-test-valgrind:
 	make && \
 	pytest tests/test_server.py::test_server_valgrind
 
