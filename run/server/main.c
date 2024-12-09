@@ -26,7 +26,6 @@ int	main(void)
 	sa_shutdown.sa_handler = &interrupt_handler;
 	sa_shutdown.sa_flags = 0;
 	sigemptyset(&sa_shutdown.sa_mask);
-	sigaction(SIGTERM, &sa_shutdown, NULL);
 	sigaction(SIGINT, &sa_shutdown, NULL);
 
 	ft_putstr_fd((char *)"Server pid: ", STDOUT_FILENO);

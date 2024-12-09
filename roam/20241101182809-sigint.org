@@ -5,4 +5,6 @@
 #+date: [2024-11-01 Fri 18:28]
 #+startup: overview
 
+~CTRL-C~
+
 (Interrupt): Sent when the user types an interrupt character (usually Ctrl+C).

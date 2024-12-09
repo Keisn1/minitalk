@@ -3,9 +3,11 @@
 import subprocess
 import time
 import signal
+import pytest
 
 
-def test_integration():
+@pytest.mark.parametrize("msg", (["my messsage"]))
+def test_integration(msg):
     srv_p = subprocess.Popen(
         "./server",
         stdout=subprocess.PIPE,
@@ -14,18 +16,31 @@ def test_integration():
     )
 
     assert srv_p.stdout is not None
+    stdout_srv = srv_p.stdout.readline()
+    assert "Server pid: " in stdout_srv
+    server_pid = stdout_srv.split(" ")[-1]
 
-    time.sleep(0.001)
+    stdout_srv = srv_p.stdout.readline()
+    assert "Ready to receive messages...\n" == stdout_srv
+
+    client_p = subprocess.Popen(
+        ["./client", server_pid, msg],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,  # Captures both stdout and stderr
+        text=True,  # Ensure output is in text mode (Python 3.7+)
+    )
+    client_p.wait()
+
+    # stdout_srv = srv_p.stdout.readline()
+    stdout_srv = srv_p.stdout.read(len(msg))
+    assert msg == stdout_srv
+
+    time.sleep(0.01)
     srv_p.send_signal(signal.SIGINT)
-    time.sleep(0.001)
+    time.sleep(0.01)
 
-    stdout, _ = srv_p.communicate()
-
-    lines = stdout.split("\n")[:-1]
-
-    assert "Server pid: " in lines[0]
-    assert "Ready to receive messages..." == lines[1]
-    assert "Goodbye." == lines[-1]
+    stdout_srv, _ = srv_p.communicate()
+    assert "\nGoodbye.\n" == stdout_srv
 
 
 def test_integration_valgrind():

@@ -13,7 +13,6 @@
 #include "libft.h"
 #include "minitalk.h"
 
-
 void	*ft_realloc(void *ptr, size_t size, size_t cpy_size)
 {
 	void	*new_ptr;
@@ -62,13 +61,12 @@ char	*update_buffer(size_t length, unsigned int signals_received, bool reset)
 
 void	interrupt_handler(int signal)
 {
-	if (signal == SIGTERM || signal == SIGINT)
+	if (signal == SIGINT)
 	{
-		ft_putendl_fd((char *)"Goodbye.", STDOUT_FILENO);
+		ft_putendl_fd((char *)"\nGoodbye.", STDOUT_FILENO);
 		exit(0);
 	}
 }
-
 
 void	string_handler(int sig, siginfo_t *siginfo, void *ucontext)
 {
@@ -80,13 +78,9 @@ void	string_handler(int sig, siginfo_t *siginfo, void *ucontext)
 	(void)ucontext;
 	buffer = update_buffer(length, signals_received, false);
 	if (sig == SIGUSR1)
-	{
 		buffer[length] = (buffer[length] >> 1) | 0b10000000;
-	}
 	else if (sig == SIGUSR2)
-	{
 		buffer[length] = (buffer[length] >> 1) & 0b01111111;
-	}
 	/* pid_t client_pid; */
 	client_pid = siginfo->si_pid;
 	kill(client_pid, SIGUSR1);
@@ -95,7 +89,7 @@ void	string_handler(int sig, siginfo_t *siginfo, void *ucontext)
 	{
 		if (buffer[length] == '\0')
 		{
-			ft_putendl_fd((char *)buffer, STDOUT_FILENO);
+			ft_putstr_fd((char *)buffer, STDOUT_FILENO);
 			update_buffer(0, 0, true);
 			length = 0;
 			signals_received = 0;
@@ -104,4 +98,3 @@ void	string_handler(int sig, siginfo_t *siginfo, void *ucontext)
 		length++;
 	}
 }
-
