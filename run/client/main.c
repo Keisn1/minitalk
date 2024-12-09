@@ -19,7 +19,6 @@ int	main(int argc, char *argv[])
 
 	(void)argc;
 	signal(SIGUSR1, &signal_handler);
-	ft_putnbr_fd(getpid(), STDOUT_FILENO);
 	server_pid = ft_atoi(argv[1]);
 	send_msg(argv[2], server_pid);
 	return (0);
