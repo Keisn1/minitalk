@@ -57,6 +57,7 @@ fclean: clean
 	rm -f $(CLIENT)
 	rm -rf $(OBJ_DIR)
 	rm -rf $(BUILD_DIR)
+	rm -rf .pytest_cache
 
 re: fclean all
 
