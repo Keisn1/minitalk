@@ -5,8 +5,10 @@ import time
 import signal
 import pytest
 
+testdata = [("my message"), ("2nd message")]
 
-@pytest.mark.parametrize("msg", (["my messsage"]))
+
+@pytest.mark.parametrize("msg", testdata)
 def test_integration(msg):
     srv_p = subprocess.Popen(
         "./server",
