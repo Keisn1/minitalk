@@ -70,12 +70,12 @@ unittest:
 
 integration-test:
 	make FSANITIZE=-fsanitize=address && \
-	pytest tests/test_server.py::test_integration_multiple_messages && \
-	pytest tests/test_server.py::test_integration_long_msg
+	pytest tests/test_server.py::test_server_multiple_messages && \
+	pytest tests/test_server.py::test_server_long_msg
 
 integration-test-valgrind:
 	make && \
-	pytest tests/test_server.py::test_integration_valgrind
+	pytest tests/test_server.py::test_server_valgrind
 
 build:
 	cmake -S . -B build -DBUILD_TEST=OFF -DBUILD_MINITALK=ON && \

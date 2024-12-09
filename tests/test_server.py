@@ -18,7 +18,7 @@ def get_random_string(length):
 
 
 @pytest.mark.parametrize("messages", testdata)
-def test_integration_multiple_messages(messages):
+def test_server_multiple_messages(messages):
     srv_p = subprocess.Popen(
         "./server",
         stdout=subprocess.PIPE,
@@ -56,7 +56,7 @@ def test_integration_multiple_messages(messages):
 
 
 # TODO flaky
-def test_integration_long_msg(length=10000):
+def test_server_long_msg(length=10000):
     srv_p = subprocess.Popen(
         "./server",
         stdout=subprocess.PIPE,
@@ -87,7 +87,7 @@ def test_integration_long_msg(length=10000):
     assert "\nGoodbye.\n" == stdout_srv[-len("\nGoodbye.\n") :]
 
 
-def test_integration_valgrind():
+def test_server_valgrind():
     srv_p = subprocess.Popen(
         ["valgrind", "--leak-check=full", "./server"],
         stdout=subprocess.PIPE,
