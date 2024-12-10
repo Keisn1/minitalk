@@ -14,7 +14,6 @@
 #include "minitalk.h"
 #include <errno.h>
 
-
 int	validate_pid_str(char *pid)
 {
 	if (!(ft_isdigit(*pid) || *pid == '-' || *pid == '+'))

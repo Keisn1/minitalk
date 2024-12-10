@@ -83,7 +83,7 @@ server-test:
 	pytest tests/test_server.py::test_server_long_msg
 
 server-test-valgrind:
-	make && \
+	make re && \
 	pytest tests/test_server.py::test_server_valgrind
 
 build:
