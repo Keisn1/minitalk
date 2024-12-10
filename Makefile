@@ -69,12 +69,12 @@ unittest:
 	./build/run_tests --gtest_repeat=10
 
 client-test:
-	make  && \
-	pytest  tests/test_client.py::test_client
+	make FSANITIZE=-fsanitize=address && \
+	pytest  tests/test_client.py::test_client_errors
 
 client-test-valgrind:
 	make && \
-	pytest tests/test_client.py
+	pytest tests/test_client.py::test_client_errors_valgrind
 
 server-test:
 	make FSANITIZE=-fsanitize=address && \
