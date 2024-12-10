@@ -61,7 +61,7 @@ fclean: clean
 
 re: fclean all
 
-test: unittest integration-test integration-test-valgrind
+test: unittest client-test client-test-valgrind server-test server-test-valgrind
 
 unittest:
 	cmake -S . -B build -DBUILD_TEST=ON && \

@@ -4,7 +4,6 @@ import subprocess
 import pytest
 
 
-@pytest.fixture
 def pid_no_perm():
     ps_command = subprocess.Popen(
         ["ps", "-eo", "pid,user"],
@@ -23,7 +22,6 @@ def pid_no_perm():
     return pid_no_perm
 
 
-@pytest.fixture
 def pid_not_ex():
     ps_command = subprocess.Popen(
         ["ps", "-eo", "pid,user"],
@@ -43,15 +41,31 @@ def pid_not_ex():
 
 
 @pytest.mark.parametrize(
-    "pid,want",
+    "pid,msg,want",
     [
-        (pid_no_perm, "You don't have permission to send a message to that target\n"),
-        (pid_not_ex, "The target you specified does not exist\n"),
+        (
+            pid_no_perm(),
+            "my message",
+            "You don't have permission to send a message to that target\n",
+        ),
+        (pid_not_ex(), "my message", "The target you specified does not exist\n"),
+        (-1, "my message", "Server pid must be greater 0\n"),
+        (0, "my message", "Server pid must be greater 0\n"),
+        (None, None, "Missing server pid and message\n"),
+        ("12-12", "my message", "Not a process id\n"),
+        ("asdf", "my message", "Not a process id\n"),
+        ("123", None, "Missing message\n"),
+        (None, "my message", "Missing message\n"),
     ],
 )
-def test_client(pid, want):
+def test_client(pid, msg, want):
+    cmd = ["./client"]
+    if pid is not None:
+        cmd += [str(pid)]
+    if msg is not None:
+        cmd += [msg]
     client_p = subprocess.Popen(
-        ["./client", str(pid), "my message"],
+        cmd,
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
         text=True,
@@ -61,31 +75,6 @@ def test_client(pid, want):
     assert client_p.stdout is not None
     stdout_client = client_p.stdout.readline()
     assert stdout_client == want
-    # srv_p = subprocess.Popen(
-    #     "./server",
-    #     stdout=subprocess.PIPE,
-    #     stderr=subprocess.STDOUT,  # Captures both stdout and stderr
-    #     text=True,  # Ensure output is in text mode (Python 3.7+)
-    # )
-
-    # assert srv_p.stdout is not None
-    # stdout_srv = srv_p.stdout.readline()
-    # assert "Server pid: " in stdout_srv
-    # server_pid = stdout_srv.split(" ")[-1]
-    # srv_p.send_signal(signal.SIGINT)
-
-    # client_p = subprocess.Popen(
-    #     ["./client", server_pid, "my message"],
-    #     stdout=subprocess.PIPE,
-    #     stderr=subprocess.STDOUT,
-    #     text=True,
-    # )
-    # client_p.wait()
-
-    # assert client_p.stdout is not None
-    # stdout_client = client_p.stdout.readline()
-
-    # assert "The target you specified does not exist\n" == stdout_client
 
 
 def test_client_valgrind():
