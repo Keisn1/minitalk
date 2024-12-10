@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error_handling_client.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kfreyer <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/10 21:46/16 by kfreyer           #+#    #+#             */
+/*   Updated: 2024/12/10 21:46:16 by kfreyer          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "minitalk.h"
 
 int	validate_pid_str(char *pid)
@@ -45,7 +56,8 @@ int	server_pid_validation(int server_pid)
 	if (kill(server_pid, 0) == -1)
 	{
 		if (errno == EPERM)
-			ft_putendl_fd("You don't have permission to send a message to that target",
+			ft_putendl_fd("You don't have permission to"
+				"send a message to that target",
 				STDOUT_FILENO);
 		if (errno == ESRCH)
 			ft_putendl_fd("The target you specified does not exist",
