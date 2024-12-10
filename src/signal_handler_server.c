@@ -85,7 +85,7 @@ void	string_handler(int sig, siginfo_t *siginfo, void *ucontext)
 	signals_received++;
 	if (signals_received % 8 == 0)
 	{
-		if (buffer[length] == '\0')
+		if (buffer[length++] == '\0')
 		{
 			usleep(100000);
 			ft_putstr_fd((char *)buffer, STDOUT_FILENO);
@@ -95,6 +95,5 @@ void	string_handler(int sig, siginfo_t *siginfo, void *ucontext)
 			kill(siginfo->si_pid, SIGUSR2);
 			return ;
 		}
-		length++;
 	}
 }

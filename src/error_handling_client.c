@@ -9,7 +9,11 @@
 /*   Updated: 2024/12/10 21:46:16 by kfreyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 #include "minitalk.h"
+#include <errno.h>
+
 
 int	validate_pid_str(char *pid)
 {
@@ -57,7 +61,7 @@ int	server_pid_validation(int server_pid)
 	{
 		if (errno == EPERM)
 			ft_putendl_fd("You don't have permission to"
-				"send a message to that target",
+				" send a message to that target",
 				STDOUT_FILENO);
 		if (errno == ESRCH)
 			ft_putendl_fd("The target you specified does not exist",
