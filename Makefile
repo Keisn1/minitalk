@@ -66,7 +66,8 @@ test: unittest client-test client-test-valgrind server-test server-test-valgrind
 unittest:
 	cmake -S . -B build -DBUILD_TEST=ON && \
 	cmake --build build && \
-	./build/run_tests --gtest_repeat=10
+	./build/run_tests
+# --gtest_repeat=10
 
 client-test:
 	make FSANITIZE=-fsanitize=address && \

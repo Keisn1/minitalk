@@ -15,6 +15,15 @@ protected:
 		sigaction(SIGUSR1, &action, NULL);
 		sigaction(SIGUSR2, &action, NULL);
   }
+
+	void TearDown() override {
+		struct sigaction action;
+		action.sa_handler = SIG_DFL; // Reset to default handler
+		sigemptyset(&action.sa_mask);
+		action.sa_flags = 0;
+		sigaction(SIGUSR1, &action, NULL);
+		sigaction(SIGUSR2, &action, NULL);
+	}
 };
 
 void send_char(char c) {

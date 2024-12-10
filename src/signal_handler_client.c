@@ -16,10 +16,15 @@
 
 volatile sig_atomic_t	g_server_signal_received = 0;
 
-void	signal_handler(int signal)
+void	client_signal_handler(int signal)
 {
-	(void)signal;
-	g_server_signal_received = 1;
+	if (signal == SIGUSR1)
+		g_server_signal_received = 1;
+	if (signal == SIGUSR2) {
+		ft_putendl_fd("Server: \"Message received\"", STDOUT_FILENO);
+	}
+	return;
+
 }
 
 void	send_char(char c, pid_t pid)

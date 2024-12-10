@@ -12,6 +12,7 @@
 
 #include "libft.h"
 #include "minitalk.h"
+#include <unistd.h>
 
 void	*ft_realloc(void *ptr, size_t size, size_t cpy_size)
 {
@@ -86,10 +87,12 @@ void	string_handler(int sig, siginfo_t *siginfo, void *ucontext)
 	{
 		if (buffer[length] == '\0')
 		{
+			usleep(100000);
 			ft_putstr_fd((char *)buffer, STDOUT_FILENO);
 			update_buffer(0, 0, true);
 			length = 0;
 			signals_received = 0;
+			kill(siginfo->si_pid, SIGUSR2);
 			return ;
 		}
 		length++;

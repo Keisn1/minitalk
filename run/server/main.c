@@ -33,8 +33,6 @@ int	main(void)
 	ft_putendl_fd((char *)"", STDOUT_FILENO);
 	ft_putendl_fd((char *)"Ready to receive messages...", STDOUT_FILENO);
 	while (1)
-	{
 		pause();
-	}
 	return (0);
 }

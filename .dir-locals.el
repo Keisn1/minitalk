@@ -1,2 +1,2 @@
-((nil . ((org-roam-directory . "/home/kfreyer/workspace/minitalk/roam")
-         (org-roam-db-location . "/home/kfreyer/workspace/minitalk/roam/minitalk.db"))))
+((nil . ((org-roam-directory . "~/workspace/minitalk/roam")
+         (org-roam-db-location . "~/workspace/minitalk/roam/minitalk.db"))))
