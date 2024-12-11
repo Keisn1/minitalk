@@ -48,6 +48,7 @@ error_testdata = [
     ),
     (pid_not_ex(), "my message", "The target you specified does not exist\n"),
     (-1, "my message", "Server pid must be greater 0\n"),
+    (-2, "my message", "Server pid must be greater 0\n"),
     (0, "my message", "Server pid must be greater 0\n"),
     (None, None, "Missing server pid and message\n"),
     ("12-12", "my message", "Not a process id\n"),
