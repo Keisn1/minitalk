@@ -16,6 +16,7 @@
 # include <stdbool.h>
 # include <unistd.h>
 
+/* defined in signal_handler_client.c */
 extern volatile sig_atomic_t	g_server_signal_received;
 
 int								validate_pid_str(char *pid);
