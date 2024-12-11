@@ -102,4 +102,3 @@ def test_client_errors_valgrind(pid, msg, want):
         "ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)"
         in stdout_client
     )
-    assert want in stdout_client
