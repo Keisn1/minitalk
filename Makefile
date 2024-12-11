@@ -52,7 +52,7 @@ $(OBJ_DIR):
 clean: libft-clean
 	rm -f $(TEST_TARGET) $(OBJ_FILES)
 
-fclean: clean
+fclean: clean libft-fclean
 	rm -f $(SERVER)
 	rm -f $(CLIENT)
 	rm -rf $(OBJ_DIR)
